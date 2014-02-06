@@ -30,6 +30,8 @@ var server = http.createServer(function(req,res) {
 		'css':'text/css'
 	};
 
+	
+
 	if(url == '/db_dump') {
 		database.query("SELECT * FROM hacku",function(err,rows) {
 			res.writeHead(200);
