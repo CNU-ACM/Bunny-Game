@@ -41,8 +41,12 @@
                 loadingCanvas.style.visibility = "visible";
                 gameCanvas.style.visibility = "hidden";
 
-                loadWorld("testPlayer", "defaultRoom", 0, 0, 0);
-                loadCharacter("testPlayer", 0, 0, 0);
+                Lib().load(function () {
+                    loadWorld("testPlayer", "defaultRoom", 0, 0, 0);
+                });
+                Lib().load(function () {
+                    loadCharacter("testPlayer", 0, 0, 0);
+                });
 
                 var loadingCanvas = document.getElementById("loading-canvas");
                 var gameCanvas = document.getElementById("game-canvas");
