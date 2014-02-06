@@ -7,19 +7,33 @@
         <title>HackU-Server</title>
 
         <script src="Lib.js/Lib.js"></script>
+<<<<<<< HEAD
+=======
         <script src="game/Loading/testWorld.js"></script>
+>>>>>>> gemisis
     </head>
 
     <body>
 
+<<<<<<< HEAD
+        <canvas id="main-canvas">
+=======
         <canvas id="loading-canvas" style="position:absolute;">
         </canvas>
         
         <canvas id="game-canvas" style="visibility:hidden; position:absolute;">
+>>>>>>> gemisis
         </canvas>
 
         <script>
             window.onload = function () {
+<<<<<<< HEAD
+                var canvas = document.getElementById("main-canvas");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                Lib().setCanvas(canvas);
+                Lib("loader").sprite({ src: "Lib.js/graphics/loader.png", size: [128, 128], frequency: 20, x: 'center', y: 'center'});
+=======
                 var loadingCanvas = document.getElementById("loading-canvas");
                 loadingCanvas.width = window.innerWidth;
                 loadingCanvas.height = window.innerHeight;
@@ -34,6 +48,7 @@
                 // Get the player's world information here.
 
                 loadTestWorld("testPlayer", "defaultRoom", 0, 0);
+>>>>>>> gemisis
             }
         </script>
 

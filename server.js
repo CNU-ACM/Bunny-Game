@@ -16,7 +16,15 @@ database.connect(function(err) {
 });
 
 var server = http.createServer(function(req,res) {
-	var url = req.url;
+	var url = req.url == '/' ? 'index.html' : req.url;
+	var types = {
+		'js':'application/javascript',
+		'html':'text/html',
+		'png':'image/png',
+		'jpg':'image/jpeg',
+		'jpeg':'image/jpeg',
+		'css':'text/css'
+	};
 
 	if(url == '/db_dump') {
 		database.query("SELECT * FROM hacku",function(err,rows) {
@@ -24,7 +32,7 @@ var server = http.createServer(function(req,res) {
 			res.end(JSON.stringify(rows));
 		});
 	} else {
-		fs.readFile('index.html',function(err,data) {
+		fs.readFile(__dirname+'/'+url,function(err,data) {
 			if(err) {
 				res.writeHead(500);
 				return res.end('Error reading index file.');
