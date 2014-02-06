@@ -2,7 +2,7 @@ function loadTestChar(playerName, worldArray, x, y) {
     Lib("testChar").sprite({
         src:"Game/Graphics/Characters/testChar.png",
         size:[50,100],
-        position:[0,0],
+        position:[0,200],
         speed:70,
         frequency: 13,
         x:x,
@@ -10,6 +10,7 @@ function loadTestChar(playerName, worldArray, x, y) {
     });
 
     Lib("testChar").load(function () {
+
         Lib().addInputRule(function () {
             var character = Lib("testChar");
             character.stopAnimation();
@@ -43,8 +44,16 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
 
-            var tileList = [[0, "speed", 70], [1, "speed", 40], [2, "stop"]];
+            var tileList = [[0, "speed", 70], [1, "speed", 40], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle]];
             checkCollisionsBase(worldArray, character, 102, 121, tileList);
         });
     });
 }
+
+function chestHandle(x, y) {
+    var chest = Lib("treasureTile" + (x + y * 13));
+    chest.hidden = true;
+    chest.hide();
+    Lib("grassTile" + (x + y * 13)).show();
+}
+

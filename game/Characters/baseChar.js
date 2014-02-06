@@ -24,8 +24,17 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
     x = Math.floor(x);
     y = Math.floor(y);
     for (var i = 0; i < tileList.length; i += 1) {
-        if (worldArray[x + y * 13] == tileList[i][0] && tileList[i][1] == "stop") {
-            character.increaseY();
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "stop":
+                    character.increaseY();
+                    break;
+                case "keyInteract":
+                    if (!Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        character.increaseY();
+                    }
+                    break;
+            }
         }
     }
 
@@ -35,8 +44,17 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
     x = Math.floor(x);
     y = Math.floor(y);
     for (var i = 0; i < tileList.length; i += 1) {
-        if (worldArray[x + y * 13] == tileList[i][0] && tileList[i][1] == "stop") {
-            character.increaseX();
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "stop":
+                    character.increaseX();
+                    break;
+                case "keyInteract":
+                    if (!Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        character.increaseX();
+                    }
+                    break;
+            }
         }
     }
 
@@ -46,8 +64,17 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
     x = Math.floor(x);
     y = Math.floor(y);
     for (var i = 0; i < tileList.length; i += 1) {
-        if (worldArray[x + y * 13] == tileList[i][0] && tileList[i][1] == "stop") {
-            character.decreaseX();
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "stop":
+                    character.decreaseX();
+                    break;
+                case "keyInteract":
+                    if (!Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        character.decreaseX();
+                    }
+                    break;
+            }
         }
     }
 
@@ -57,8 +84,85 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
     x = Math.floor(x);
     y = Math.floor(y);
     for (var i = 0; i < tileList.length; i += 1) {
-        if (worldArray[x + y * 13] == tileList[i][0] && tileList[i][1] == "stop") {
-            character.decreaseY();
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "stop":
+                    character.decreaseY();
+                    break;
+                case "keyInteract":
+                    if (!Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        character.decreaseY();
+                    }
+                    break;
+            }
+        }
+    }
+
+    // Interaction Top side collisions
+    x = (character.getX() + character.getWidth() / 2) / tileWidth;
+    y = (character.getY() + 50 - 10) / tileHeight;
+    x = Math.floor(x);
+    y = Math.floor(y);
+    for (var i = 0; i < tileList.length; i += 1) {
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "keyInteract":
+                    if (Lib().hasInputKey(tileList[i][3]) && !Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        tileList[i][4](x, y);
+                    }
+                    break;
+            }
+        }
+    }
+
+    // Interaction Left side collisions
+    x = (character.getX() - 10) / tileWidth;
+    y = (character.getY() + character.getHeight() / 2) / tileHeight;
+    x = Math.floor(x);
+    y = Math.floor(y);
+    for (var i = 0; i < tileList.length; i += 1) {
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "keyInteract":
+                    if (Lib().hasInputKey(tileList[i][3]) && !Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        tileList[i][4](x, y);
+                    }
+                    break;
+            }
+        }
+    }
+
+    // Interaction Right side collisions
+    x = (character.getX() + character.getWidth() + 10) / tileWidth;
+    y = (character.getY() + character.getHeight() / 2) / tileHeight;
+    x = Math.floor(x);
+    y = Math.floor(y);
+    for (var i = 0; i < tileList.length; i += 1) {
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "keyInteract":
+                    if (Lib().hasInputKey(tileList[i][3]) && !Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        tileList[i][4](x, y);
+                    }
+                    break;
+            }
+        }
+    }
+
+    // Interaction Bottom side collisions
+    x = (character.getX() + character.getWidth() / 2) / tileWidth;
+    y = (character.getY() + character.getHeight() + 10) / tileHeight;
+    x = Math.floor(x);
+    y = Math.floor(y);
+    for (var i = 0; i < tileList.length; i += 1) {
+        if (worldArray[x + y * 13] == tileList[i][0]) {
+            switch (tileList[i][1]) {
+                case "keyInteract":
+                    if (Lib().hasInputKey(tileList[i][3]) && !Lib(tileList[i][2] + (x + y * 13)).hidden) {
+                        tileList[i][4](x, y);
+                    }
+                    break;
+            }
         }
     }
 }
