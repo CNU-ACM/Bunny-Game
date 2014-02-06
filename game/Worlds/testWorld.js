@@ -1,22 +1,9 @@
-function loadTestWorld(playerName, worldSpot, x, y) {
-
-    var array = [
-    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ];
+function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
 
     for (var y = 0; y < 10; y += 1) {
         for (var x = 0; x < 13; x += 1) {
 
-            switch (array[x + y * 13]) {
+            switch (worldArray[x + y * 13]) {
                 case 0:
                     Lib("grassTile" + (x + y * 13)).sprite({
                         src: "Game/Graphics/Tiles/testTiles.png",

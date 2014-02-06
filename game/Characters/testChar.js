@@ -1,4 +1,4 @@
-function loadTestChar(playerName, x, y) {
+function loadTestChar(playerName, worldArray, x, y) {
     Lib("testChar").sprite({
         src:"Game/Graphics/Characters/testChar.png",
         size:[50,100],
@@ -41,6 +41,18 @@ function loadTestChar(playerName, x, y) {
                 character.reverseAnimation(false);
                 character.decreaseY();
                 character.resumeAnimation();
+            }
+
+            var x = (character.getX() + character.getWidth() / 2) / 102;
+            var y = (character.getY() + 122) / 171;
+            x = Math.floor(x);
+            y = Math.floor(y);
+
+            if (worldArray[x + y * 13] == 0) {
+                character.setSpeed(70);
+            }
+            if (worldArray[x + y * 13] == 1) {
+                character.setSpeed(40);
             }
         });
     });
