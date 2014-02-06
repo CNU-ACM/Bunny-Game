@@ -27,7 +27,11 @@
                 loadingCanvas.width = window.innerWidth;
                 loadingCanvas.height = window.innerHeight;
                 Lib().setCanvas(loadingCanvas);
+<<<<<<< HEAD
+                Lib("loader").sprite({ src: "libjs/graphics/loader.png", size: [128, 128], frequency: 20, x: 'center', y: 'center' });
+=======
                 Lib("loader").sprite({ src: "Game/Graphics/loading.png", size: [128, 128], frequency: 20, x: 'center', y: 'center' });
+>>>>>>> d8cfe40367cc1969dba5d1516fa9577660a63522
 
                 var gameCanvas = document.getElementById("game-canvas");
                 gameCanvas.width = window.innerWidth;
