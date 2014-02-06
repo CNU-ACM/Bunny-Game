@@ -47,6 +47,30 @@
 
       <script type="text/javascript">
 
+      //fbAsyncInit();
+      
+      FB.Event.subscribe('auth.authResponseChange', function(response) {
+
+<<<<<<< HEAD
+
+FB.Event.subscribe('auth.authResponseChange', function(response) {
+
+    if (response.status === 'connected') {
+		console.log("asdf");
+		FB.login();
+		window.location.replace("http://10.67.31.165:8888/game")
+    }
+});
+=======
+          if (response.status === 'connected') {
+            FB.login();
+            console.log("test after login");
+          }
+      });
+>>>>>>> new_branch
+
+
+
       </script>
     </div>
 
