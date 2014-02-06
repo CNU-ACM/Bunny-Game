@@ -43,17 +43,8 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
 
-            var x = (character.getX() + character.getWidth() / 2) / 102;
-            var y = (character.getY() + 122) / 171;
-            x = Math.floor(x);
-            y = Math.floor(y);
-
-            if (worldArray[x + y * 13] == 0) {
-                character.setSpeed(70);
-            }
-            if (worldArray[x + y * 13] == 1) {
-                character.setSpeed(40);
-            }
+            var tileList = [[0, "speed", 70], [1, "speed", 40], [2, "stop"]];
+            checkCollisionsBase(worldArray, character, 102, 121, tileList);
         });
     });
 }

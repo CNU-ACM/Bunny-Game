@@ -5,4 +5,3 @@ function loadWorld(playerName, worldSpot, worldID, worldArray, x, y) {
             break;
     }
 }
-
