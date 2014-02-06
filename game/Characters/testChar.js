@@ -1,17 +1,17 @@
-function loadTestWorld(playerName, worldSpot, x, y) {
-    Lib("guy").sprite({
-        src:"Lib.js/graphics/guy2.png",
+function loadTestChar(playerName, x, y) {
+    Lib("testChar").sprite({
+        src:"Game/Graphics/Characters/testChar.png",
         size:[50,100],
-        position:[x,y],
+        position:[0,0],
         speed:70,
-        frequency:13,
-        x:'center',
-        y: 'center'
+        frequency: 13,
+        x:x,
+        y:y
     });
 
-    Lib().load(function () {
+    Lib("testChar").load(function () {
         Lib().addInputRule(function () {
-            var character = Lib("guy");
+            var character = Lib("testChar");
             character.stopAnimation();
 
             if (Lib().hasInputKey(39)) {
@@ -43,10 +43,5 @@ function loadTestWorld(playerName, worldSpot, x, y) {
                 character.resumeAnimation();
             }
         });
-
-        var loadingCanvas = document.getElementById("loading-canvas");
-        var gameCanvas = document.getElementById("game-canvas");
-        loadingCanvas.style.visibility = "hidden";
-        gameCanvas.style.visibility = "visible";
     });
 }

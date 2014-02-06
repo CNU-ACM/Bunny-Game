@@ -22,10 +22,14 @@ define('DB_NAME', 'dabase');
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'root');
 
 /** MySQL hostname */
+<<<<<<< HEAD
 define('DB_HOST', 'http://10.67.31.165:8888');
+=======
+define('DB_HOST', 'localhost:8889');
+>>>>>>> master
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');

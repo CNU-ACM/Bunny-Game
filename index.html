@@ -20,9 +20,14 @@ fbAsyncInit();
 FB.Event.subscribe('auth.authResponseChange', function(response) {
 
     if (response.status === 'connected') {
+<<<<<<< HEAD:index.html
 		console.log("asdf");
 		FB.login();
 		window.location.replace("http://10.67.31.165:8888/game")
+=======
+      FB.login();
+      window.location.replace("http://localhost:8888/game")
+>>>>>>> master:_index.html
     }
 });
 
