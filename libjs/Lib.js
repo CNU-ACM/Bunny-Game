@@ -49,7 +49,7 @@ Sprite.prototype.render = function(ctx) {
 	var width = this.size[0];
 	var height = this.size[1];
 	if(this.scale) {
-
+		console.log("scale detected for object ");
 	}
 
 	ctx.drawImage(Lib.resources[this.url],x,y,this.size[0],this.size[1],0,0,this.size[0],this.size[1]);
