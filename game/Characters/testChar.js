@@ -1,4 +1,4 @@
-function loadTestChar(playerName, x, y) {
+function loadTestChar(playerName, worldArray, x, y) {
     Lib("testChar").sprite({
         src:"Game/Graphics/Characters/testChar.png",
         size:[50,100],
@@ -42,6 +42,9 @@ function loadTestChar(playerName, x, y) {
                 character.decreaseY();
                 character.resumeAnimation();
             }
+
+            var tileList = [[0, "speed", 70], [1, "speed", 40], [2, "stop"]];
+            checkCollisionsBase(worldArray, character, 102, 121, tileList);
         });
     });
 }
