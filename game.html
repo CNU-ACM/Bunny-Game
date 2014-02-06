@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="en-us">
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>HackU-Server</title>
+
+        <script src="Lib.js/Lib.js"></script>
+    </head>
+
+    <body>
+
+        <canvas id="main-canvas">
+        </canvas>
+
+        <script>
+            window.onload = function () {
+                var canvas = document.getElementById("main-canvas");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                Lib().setCanvas(canvas);
+                Lib("loader").sprite({ src: "Lib.js/graphics/loader.png", size: [128, 128], frequency: 20, x: 'center', y: 'center'});
+            }
+        </script>
+
+    </body>
+
+</html>
