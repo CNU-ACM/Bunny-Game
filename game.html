@@ -7,7 +7,10 @@
         <title>HackU-Server</title>
 
         <script src="libjs/Lib.js"></script>
-        <script src="game/Loading/testWorld.js"></script>
+        <script src="game/Worlds/baseWorld.js"></script>
+        <script src="game/Worlds/testWorld.js"></script>
+        <script src="game/Characters/baseChar.js"></script>
+        <script src="game/Characters/testChar.js"></script>
     </head>
 
     <body>
@@ -24,7 +27,7 @@
                 loadingCanvas.width = window.innerWidth;
                 loadingCanvas.height = window.innerHeight;
                 Lib().setCanvas(loadingCanvas);
-                Lib("loader").sprite({ src: "Lib.js/graphics/loader.png", size: [128, 128], frequency: 20, x: 'center', y: 'center' });
+                Lib("loader").sprite({ src: "Game/Graphics/loading.png", size: [128, 128], frequency: 20, x: 'center', y: 'center' });
 
                 var gameCanvas = document.getElementById("game-canvas");
                 gameCanvas.width = window.innerWidth;
@@ -33,7 +36,18 @@
 
                 // Get the player's world information here.
 
-                loadTestWorld("testPlayer", "defaultRoom", 0, 0);
+                var loadingCanvas = document.getElementById("loading-canvas");
+                var gameCanvas = document.getElementById("game-canvas");
+                loadingCanvas.style.visibility = "visible";
+                gameCanvas.style.visibility = "hidden";
+
+                loadWorld("testPlayer", "defaultRoom", 0, 0, 0);
+                loadCharacter("testPlayer", 0, 0, 0);
+
+                var loadingCanvas = document.getElementById("loading-canvas");
+                var gameCanvas = document.getElementById("game-canvas");
+                loadingCanvas.style.visibility = "hidden";
+                gameCanvas.style.visibility = "visible";
             }
         </script>
 
