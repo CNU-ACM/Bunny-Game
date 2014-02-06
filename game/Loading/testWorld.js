@@ -1,6 +1,6 @@
 function loadTestWorld(playerName, worldSpot, x, y) {
     Lib("guy").sprite({
-        src:"Lib.js/graphics/guy2.png",
+        src:"libjs/graphics/guy2.png",
         size:[50,100],
         position:[x,y],
         speed:70,
