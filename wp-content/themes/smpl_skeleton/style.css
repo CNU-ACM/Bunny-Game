@@ -200,6 +200,7 @@ body.sidebar-left #wrap #sidebar .widget-container {
 #navigation {
 	margin-bottom: 20px;
 	clear: both;
+	display: none;
 }
 
 #navigation ul,
@@ -1693,7 +1694,7 @@ p.trigger.active a {
 
 #respond input[type=text] { width:300px; margin-right:20px; }
 #respond textarea {width:550px; height:120px; padding:10px; }
-#comments { float:left; margin:0;}
+#comments { float:left; margin:0;display:none;}
 
 #comments {border: 0;width: 100%;}
 body.dark #comments {background: url(images/dark/divider.png) repeat-x right top;}
