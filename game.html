@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en-us">
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>HackU-Server</title>
+
+        <script src="Lib.js/Lib.js"></script>
+        <script src="game/Loading/testWorld.js"></script>
+    </head>
+
+    <body>
+
+        <canvas id="loading-canvas" style="position:absolute;">
+        </canvas>
+        
+        <canvas id="game-canvas" style="visibility:hidden; position:absolute;">
+        </canvas>
+
+        <script>
+            window.onload = function () {
+                var loadingCanvas = document.getElementById("loading-canvas");
+                loadingCanvas.width = window.innerWidth;
+                loadingCanvas.height = window.innerHeight;
+                Lib().setCanvas(loadingCanvas);
+                Lib("loader").sprite({ src: "Lib.js/graphics/loader.png", size: [128, 128], frequency: 20, x: 'center', y: 'center' });
+
+                var gameCanvas = document.getElementById("game-canvas");
+                gameCanvas.width = window.innerWidth;
+                gameCanvas.height = window.innerHeight;
+                Lib().setCanvas(gameCanvas);
+
+                // Get the player's world information here.
+
+                loadTestWorld("testPlayer", "defaultRoom", 0, 0);
+            }
+        </script>
+
+    </body>
+
+</html>
