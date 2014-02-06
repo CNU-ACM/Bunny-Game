@@ -1,5 +1,5 @@
 function loadTestChar(playerName, x, y) {
-    Lib("guy").sprite({
+    Lib("testChar").sprite({
         src:"Game/Graphics/Characters/testChar.png",
         size:[50,100],
         position:[0,0],
@@ -9,9 +9,9 @@ function loadTestChar(playerName, x, y) {
         y:y
     });
 
-    Lib().load(function () {
+    Lib("testChar").load(function () {
         Lib().addInputRule(function () {
-            var character = Lib("guy");
+            var character = Lib("testChar");
             character.stopAnimation();
 
             if (Lib().hasInputKey(39)) {
