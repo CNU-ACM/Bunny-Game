@@ -3,13 +3,36 @@
 <head>
 <meta charset="utf-8"/>
 <title>HackU-Server</title>
+<script type="text/javascript" src="js/fb.js"></script>
 </head>
 <body>
 <div id="fb-root"></div>
 
-
 Hi.
+<br /><br />
+Test Facebook login button: <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
 
-Test Facebook login button: <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+<script type="text/javascript">
+
+fbAsyncInit();
+
+FB.Event.subscribe('auth.authResponseChange', function(response) {
+    if (response.status === 'connected') {
+      console.log('Logged in');
+    } else {
+      FB.login();
+    }
+});
+
+FB.login(function(response) {
+    if (response.authResponse) {
+        window.location.replace("http://10.67.31.165:8888/game.html")
+    } else {
+        window.location.replace("http://10.67.31.165:8888/")
+    }
+});
+
+</script>
+
 </body>
 </html>
