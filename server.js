@@ -21,13 +21,19 @@ var server = http.createServer(function(req,res) {
 		url = 'game.html';
 	}
 
+	var filesplit = url.split(".");
+	filesplit = filesplit[filesplit.length-1];
+
 	var types = {
 		'js':'application/javascript',
 		'html':'text/html',
 		'png':'image/png',
 		'jpg':'image/jpeg',
 		'jpeg':'image/jpeg',
-		'css':'text/css'
+		'css':'text/css',
+		'ico':'image/x-ico',
+		'text':'text/plain',
+		'gif':'image/gif'
 	};
 
 	if(url == '/db_dump') {
@@ -42,7 +48,7 @@ var server = http.createServer(function(req,res) {
 				return res.end('Error reading index file.');
 			}
 
-			res.writeHead(200,{'Content-type':'text/html'});
+			res.writeHead(200,{'Content-type':(types[filesplit] || types['text'])});
 			res.end(data);
 		});
 	}
