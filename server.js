@@ -17,6 +17,10 @@ database.connect(function(err) {
 
 var server = http.createServer(function(req,res) {
 	var url = req.url == '/' ? 'index.html' : req.url;
+	if(url == '/game') {
+		url = 'game.html';
+	}
+
 	var types = {
 		'js':'application/javascript',
 		'html':'text/html',
