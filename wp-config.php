@@ -25,7 +25,7 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 
 /** MySQL hostname */
-define('DB_HOST', '10.67.31.165:8888');
+define('DB_HOST', 'http://10.67.31.165:8888');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
