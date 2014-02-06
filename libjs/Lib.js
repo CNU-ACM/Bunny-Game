@@ -49,10 +49,11 @@ Sprite.prototype.render = function(ctx) {
 	var width = this.size[0];
 	var height = this.size[1];
 	if(this.scale) {
-
+		width *= this.scale;
+		height *= this.scale;
 	}
 
-	ctx.drawImage(Lib.resources[this.url],x,y,this.size[0],this.size[1],0,0,this.size[0],this.size[1]);
+	ctx.drawImage(Lib.resources[this.url],x,y,this.size[0],this.size[1],0,0,width,height);
 };
 var Lib = {
 	canvas:null,
@@ -612,6 +613,7 @@ var Lib = {
 			self.sprite = new Sprite(self.settings.src,self.settings.size,self.settings.frequency,self.settings.position,self.settings.direction,self.settings.frames,self.canvas);
 			if(self.settings.reverse) self.sprite.reverseAnimation = true;
 			if(self.settings.scale) self.sprite.scale = self.settings.scale;
+			
 			Lib.addObject(self,self.id);
 			Lib.resources[self.settings.src] = this;
 			if(Lib.eventQueue[self.id]) {

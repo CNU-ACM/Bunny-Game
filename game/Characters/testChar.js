@@ -4,6 +4,7 @@ function loadTestChar(playerName, worldArray, x, y) {
         size:[50,100],
         position:[0,0],
         speed:70,
+        scale:4,
         frequency: 13,
         x:x,
         y:y
