@@ -15,14 +15,14 @@ database.connect(function(err) {
 });
 
 var server = http.createServer(function(req,res) {
-	fs.readFile('/index.html',function(err,data) {
+	fs.readFile('index.html',function(err,data) {
 		if(err) {
 			res.writeHead(500);
 			return res.end('Error reading index file.');
 		}
 
-		res.writeHead(200);
-		res.end("Hello World.");
+		res.writeHead(200,{'Content-type':'text/html'});
+		res.end(data);
 	});
 });
 
