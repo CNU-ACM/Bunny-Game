@@ -1,9 +1,11 @@
 function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
-    for (var y = 0; y < 10; y += 1) {
-        for (var x = 0; x < 13; x += 1) {
-            switch (worldArray[x + y * 13]) {
+    var widthTiles = 40;
+    var heightTiles = 30;
+    for (var y = 0; y < heightTiles; y += 1) {
+        for (var x = 0; x < widthTiles; x += 1) {
+            switch (worldArray[x + y * widthTiles]) {
                 case 0:
-                    Lib("grassTile" + (x + y * 13)).sprite({
+                    Lib("grassTile" + (x + y * widthTiles)).sprite({
                         src: "game/Graphics/Tiles/testTiles.png",
                         size: [102, 171],
                         position: [102 * 4, 171 * 4],
@@ -14,7 +16,7 @@ function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
                     });
                     break;
                 case 1:
-                    Lib("waterTile" + (x + y * 13)).sprite({
+                    Lib("waterTile" + (x + y * widthTiles)).sprite({
                         src: "game/Graphics/Tiles/testTiles.png",
                         size: [102, 171],
                         position: [102 * 2, 171 * 0],
@@ -25,7 +27,7 @@ function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
                     });
                     break;
                 case 2:
-                    Lib("blockTile" + (x + y * 13)).sprite({
+                    Lib("blockTile" + (x + y * widthTiles)).sprite({
                         src: "game/Graphics/Tiles/testTiles.png",
                         size: [102, 171],
                         position: [102 * 4, 171 * 0],
@@ -36,7 +38,7 @@ function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
                     });
                     break;
                 case 3:
-                    Lib("grassTile" + (x + y * 13)).sprite({
+                    Lib("grassTile" + (x + y * widthTiles)).sprite({
                         src: "game/Graphics/Tiles/testTiles.png",
                         size: [102, 171],
                         position: [102 * 4, 171 * 4],
@@ -45,8 +47,8 @@ function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
                         x: x * 102,
                         y: y * 121 - 50
                     });
-                    Lib("grassTile" + (x + y * 13)).hide();
-                    Lib("treasureTile" + (x + y * 13)).sprite({
+                    Lib("grassTile" + (x + y * widthTiles)).hide();
+                    Lib("treasureTile" + (x + y * widthTiles)).sprite({
                         src: "game/Graphics/Tiles/testTiles.png",
                         size: [102, 171],
                         position: [102 * 2, 171 * 4],

@@ -11,7 +11,7 @@ function loadTestChar(playerName, worldArray, x, y) {
     });
 
     Lib("testChar").load(function () {
-        socket.on('disconnect',function() {
+        socket.on('disconnect', function () {
             Lib("testChar").hide();
         });
         if (x > window.innerWidth * 0.90) {
@@ -29,12 +29,15 @@ function loadTestChar(playerName, worldArray, x, y) {
             var character = Lib("testChar");
             character.stopAnimation();
 
+            var widthTiles = 40;
+            var heightTiles = 30 - 1;
+
             if (Lib().hasInputKey(39)) {
-                if (character.getNoScrollX() > window.innerWidth * 0.90 && character.getX() < (13 * 102) * 0.90) {
+                if (character.getNoScrollX() > window.innerWidth * 0.90 && character.getX() < (widthTiles * 102) - character.getWidth() - (character.getWidth() * 0.5)) {
                     Lib("testChar").detach();
                     character.increaseScrollX();
                 }
-                else if (character.getNoScrollX() <= window.innerWidth * 0.90) {
+                else if (character.getNoScrollX() <= window.innerWidth - character.getWidth()) {
                     character.increaseX();
                 }
                 character.setSpriteX(712 * 0);
@@ -58,11 +61,12 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(40)) {
-                if (character.getNoScrollY() > window.innerHeight * 0.90 && character.getY() < (10 * 121) * 0.90) {
+                console.log(character.getNoScrollY());
+                if (character.getNoScrollY() > window.innerHeight * 0.90 - character.getHeight() && character.getY() < (heightTiles * 121) - character.getHeight() * 0.5) {
                     Lib("testChar").detach();
                     character.increaseScrollY();
                 }
-                else if (character.getNoScrollY() <= window.innerHeight * 0.90) {
+                else if (character.getNoScrollY() <= window.innerHeight - character.getHeight()) {
                     character.increaseY();
                 }
                 character.setSpriteX(712 * 0);
@@ -93,9 +97,10 @@ function loadTestChar(playerName, worldArray, x, y) {
 }
 
 function chestHandle(x, y) {
-    var chest = Lib("treasureTile" + (x + y * 13));
+    var widthTiles = 40;
+    var chest = Lib("treasureTile" + (x + y * widthTiles));
     chest.hidden = true;
     chest.hide();
-    Lib("grassTile" + (x + y * 13)).show();
+    Lib("grassTile" + (x + y * widthTiles)).show();
 }
 
