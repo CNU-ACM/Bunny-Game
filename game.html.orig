@@ -37,7 +37,11 @@
                 // Get the player's world information here.
                 var worldArray = [
                         0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,
+<<<<<<< HEAD
+                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+=======
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+>>>>>>> 7bff132a0955965f958dff4140b5076a046e2f35
                         1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
                         2, 0, 2, 0, 0, 2, 2, 2, 0, 1, 1, 0, 0,
                         2, 0, 2, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0,
@@ -57,7 +61,11 @@
                 loadWorld("testPlayer", "defaultRoom", 0, worldArray, 0, 0);
 
                 Lib().load(function () {
+<<<<<<< HEAD
+                    loadCharacter("testPlayer", 0, worldArray, 1100, 0);
+=======
                     loadCharacter("testPlayer", 0, worldArray, 0, 0);
+>>>>>>> 7bff132a0955965f958dff4140b5076a046e2f35
                 });
 
                 var loadingCanvas = document.getElementById("loading-canvas");

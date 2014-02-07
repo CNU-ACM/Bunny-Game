@@ -88,6 +88,18 @@ var Lib = {
             Lib.detached.storedX = this.getX();
             Lib.detached.storedY = this.getY();
 		},
+        setScrollX:function(a){
+            Lib.offset.x = a;
+        },
+        setScrollY:function(a){
+            Lib.offset.y = a;
+        },
+        getScrollX:function(){
+            return Lib.offset.x;
+        },
+        getScrollY:function(){
+            return Lib.offset.y;
+        },
 		increaseScrollX:function(a) {
 			if(a) Lib.offset.x += (this.speed * time.dt) * a;
 			else Lib.offset.x += this.speed * time.dt;
@@ -218,9 +230,15 @@ var Lib = {
 			return this.settings.size[0] || this.getLineWidth();
 		},
 		getX:function() {
-			return this.x;
+			return this.x + Lib.offset.x;
 		},
 		getY:function() {
+			return this.y + Lib.offset.y;
+		},
+		getNoScrollX:function() {
+			return this.x;
+		},
+		getNoScrollY:function() {
 			return this.y;
 		},
 		getNoScrollX:function() {
