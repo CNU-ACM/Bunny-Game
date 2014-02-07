@@ -30,7 +30,7 @@ function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
                     Lib("blockTile" + (x + y * widthTiles)).sprite({
                         src: "game/Graphics/Tiles/masterTiles.png",
                         size: [200, 250],
-                        position: [200 * 4, 250 * 1],
+                        position: [200 * 4, 250 * 1], //6
                         speed: 70,
                         frequency: 0,
                         x: x * 200,
