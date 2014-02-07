@@ -25,26 +25,22 @@ function loadTestChar(playerName, worldArray, x, y) {
             Lib("testChar").setY(Lib("testChar").getNoScrollY() - Lib("testChar").getScrollY());
         }
 
-        Lib("testChar").click(function(e) {
-            var dirX = this.getNoScrollX() - e.pageX;
-            var dirY = this.getNoScrollX() - e.pageY;
+        Lib("testChar").click(function (e) {
+            var dirX = this.getNoScrollX() - e.clientX;
+            var dirY = this.getNoScrollX() - e.clientY;
 
-            if(dirX > 0)
-            {
-                // Left key press
+            if (dirX > 0) {
+                Lib().addInputKey(39);
             }
-            else if(dirX < 0)
-            {
-                // Right key press
+            else if (dirX < 0) {
+                Lib().addInputKey(37);
             }
 
-            if(dirY > 0)
-            {
-                // Down key press
+            if (dirY > 0) {
+                Lib().addInputKey(40);
             }
-            else if(dirY < 0)
-            {
-                // Up key press
+            else if (dirY < 0) {
+                Lib().addInputKey(38);
             }
         });
         Lib().addInputRule(function () {
@@ -55,6 +51,7 @@ function loadTestChar(playerName, worldArray, x, y) {
             var heightTiles = 30 - 1;
 
             if (Lib().hasInputKey(39)) {
+                Lib().removeInputKey(39);
                 if (character.getNoScrollX() > window.innerWidth * 0.90 && character.getX() < (widthTiles * 200) - character.getWidth() - (character.getWidth() * 0.5)) {
                     Lib("testChar").detach();
                     character.increaseScrollX();
@@ -69,6 +66,7 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(37)) {
+                Lib().removeInputKey(37);
                 if (character.getNoScrollX() < 50 && character.getScrollX() > 0) {
                     Lib("testChar").detach();
                     character.decreaseScrollX();
@@ -83,6 +81,7 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(40)) {
+                Lib().removeInputKey(40);
                 // console.log(character.getNoScrollY());
                 if (character.getNoScrollY() > window.innerHeight * 0.90 - character.getHeight() && character.getY() < (heightTiles * 250) - character.getHeight() * 0.5) {
                     Lib("testChar").detach();
@@ -98,6 +97,7 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(38)) {
+                Lib().removeInputKey(38);
                 if (character.getNoScrollY() < 50 && character.getScrollY() > 0) {
                     Lib("testChar").detach();
                     character.decreaseScrollY();
