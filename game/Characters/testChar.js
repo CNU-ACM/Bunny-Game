@@ -25,9 +25,13 @@ function loadTestChar(playerName, worldArray, x, y) {
             Lib("testChar").setY(Lib("testChar").getNoScrollY() - Lib("testChar").getScrollY());
         }
 
-        Lib("testChar").click(function (e) {
-            var dirX = this.getNoScrollX() - e.clientX;
-            var dirY = this.getNoScrollX() - e.clientY;
+        var isClicked = false;
+        var prio = -1;
+
+        window.addEventListener('mousdown', function() {
+            isClicked = true;
+            var dirX = -this.getNoScrollX() + window.event.clientX;
+            var dirY = -this.getNoScrollX() + window.event.clientY;
 
             if (dirX > 0) {
                 Lib().addInputKey(39);
@@ -42,7 +46,31 @@ function loadTestChar(playerName, worldArray, x, y) {
             else if (dirY < 0) {
                 Lib().addInputKey(38);
             }
+
+             var a = Math.abs(dirX) - Math.abs(dirY);
+
+             if(a > 0)
+             {
+                prio = 1;
+            }
+            else if(a < 0)
+            {
+                prio = 0;
+            }
         });
+
+        window.addEventListener('mouseup',function() {
+            isClicked = false;
+            prio    = -1;
+            Lib().removeInputKey(39);
+            Lib().removeInputKey(37);
+            Lib().removeInputKey(40);
+            Lib().removeInputKey(38);
+        });
+        // Lib("testChar").unclick(function() {
+            
+        // });
+
         Lib().addInputRule(function () {
             var character = Lib("testChar");
             character.stopAnimation();
@@ -51,7 +79,6 @@ function loadTestChar(playerName, worldArray, x, y) {
             var heightTiles = 30 - 1;
 
             if (Lib().hasInputKey(39)) {
-                Lib().removeInputKey(39);
                 if (character.getNoScrollX() > window.innerWidth * 0.90 && character.getX() < (widthTiles * 200) - character.getWidth() - (character.getWidth() * 0.5)) {
                     Lib("testChar").detach();
                     character.increaseScrollX();
@@ -59,14 +86,16 @@ function loadTestChar(playerName, worldArray, x, y) {
                 else if (character.getNoScrollX() <= window.innerWidth - character.getWidth()) {
                     character.increaseX();
                 }
+                if(prio == 1 || prio    == -1)
+                {
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 2);
                 character.setFrames([1, 2, 3, 4, 5, 6, 7]);
                 character.reverseAnimation(false);
                 character.resumeAnimation();
             }
+            }
             if (Lib().hasInputKey(37)) {
-                Lib().removeInputKey(37);
                 if (character.getNoScrollX() < 50 && character.getScrollX() > 0) {
                     Lib("testChar").detach();
                     character.decreaseScrollX();
@@ -74,14 +103,16 @@ function loadTestChar(playerName, worldArray, x, y) {
                 else if (character.getNoScrollX() >= 0 || character.getScrollX() > 0) {
                     character.decreaseX();
                 }
+                if(prio == 1 || prio    == -1)
+                {
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 3);
                 character.reverseAnimation(true);
                 character.setFrames([3, 4, 5, 6, 7, 8, 9]);
                 character.resumeAnimation();
             }
+            }
             if (Lib().hasInputKey(40)) {
-                Lib().removeInputKey(40);
                 // console.log(character.getNoScrollY());
                 if (character.getNoScrollY() > window.innerHeight * 0.90 - character.getHeight() && character.getY() < (heightTiles * 250) - character.getHeight() * 0.5) {
                     Lib("testChar").detach();
@@ -90,14 +121,16 @@ function loadTestChar(playerName, worldArray, x, y) {
                 else if (character.getNoScrollY() <= window.innerHeight - character.getHeight()) {
                     character.increaseY();
                 }
+                if(prio == 0 || prio    == -1)
+                {
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 0);
                 character.setFrames([0, 1, 2, 3, 4, 5, 6]);
                 character.reverseAnimation(false);
                 character.resumeAnimation();
             }
+            }
             if (Lib().hasInputKey(38)) {
-                Lib().removeInputKey(38);
                 if (character.getNoScrollY() < 50 && character.getScrollY() > 0) {
                     Lib("testChar").detach();
                     character.decreaseScrollY();
@@ -105,11 +138,14 @@ function loadTestChar(playerName, worldArray, x, y) {
                 else if (character.getNoScrollY() >= 0 || character.getScrollY() > 0) {
                     character.decreaseY();
                 }
+                if(prio == 0 || prio    == -1)
+                {
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 1);
                 character.setFrames([0, 1, 2, 3, 4]);
                 character.reverseAnimation(false);
                 character.resumeAnimation();
+            }
             }
 
             var tileList = [[0, "speed", 150], [1, "speed", 80], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle],

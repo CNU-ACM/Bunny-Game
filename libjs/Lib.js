@@ -64,6 +64,7 @@ var Lib = {
 	ctx:null,
     offset:{x:0,y:0},
 	detached:null,
+	clickEvents:[],
 	entities:{},
 	entityExists:{},
 	entityReadyEvents:{},
@@ -459,6 +460,9 @@ var Lib = {
 		this.canvases[this.canvases.length-1].isCurrent = true;
 		this.ctx = a.getContext("2d");
 		this.canvas.tabIndex = "1";
+		this.canvas.addEventListener('mouseup',function(e) {
+			Lib.clickEvents.push();
+		});
 		this.canvas.addEventListener('keydown',function(e) {
 			e.preventDefault();
 			Lib.keys[e.keyCode] = true;
