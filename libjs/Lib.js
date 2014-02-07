@@ -62,6 +62,7 @@ var Lib = {
 	canvas:null,
 	canvases:[],
 	ctx:null,
+    offset:{x:0,y:0},
 	detached:null,
 	entities:{},
 	entityExists:{},
@@ -84,7 +85,28 @@ var Lib = {
 		detach:function() {
 			Lib.detached = this;
 			this._detach = true;
+            Lib.detached.storedX = this.getX();
+            Lib.detached.storedY = this.getY();
 		},
+		increaseScrollX:function(a) {
+			if(a) Lib.offset.x += (this.speed * time.dt) * a;
+			else Lib.offset.x += this.speed * time.dt;
+		},
+		increaseScrollY:function(a) {
+			if(a) Lib.offset.y += (this.speed * time.dt) * a;
+			else Lib.offset.y += this.speed * time.dt;
+		},
+		decreaseScrollX:function(a) {
+			if(a) Lib.offset.x -= (this.speed * time.dt) * a;
+			else Lib.offset.x -= this.speed * time.dt;
+		},
+		decreaseScrollY:function(a) {
+			if(a) Lib.offset.y -= (this.speed * time.dt) * a;
+			else Lib.offset.y -= this.speed * time.dt;
+		},
+        isDetached:function(){
+            return (Lib.detached !== null);
+        },
 		click:function(a) {
 			requireID();
 			if(!Lib.eventQueue[Lib.id]) Lib.eventQueue[Lib.id] = [];
@@ -199,6 +221,12 @@ var Lib = {
 			return this.x;
 		},
 		getY:function() {
+			return this.y;
+		},
+		getNoScrollX:function() {
+			return this.x;
+		},
+		getNoScrollY:function() {
 			return this.y;
 		},
 		hide:function() {
@@ -730,11 +758,8 @@ function render() {
 			var ypos = Lib.canvases[i].objects[x].y;
 			if(Lib.detached) {
 				if(Lib.detached.id != Lib.canvases[i].objects[x].id) {
-					xpos -= Lib.detached.getX();
-					ypos -= Lib.detached.getY();
-				} else {
-					xpos = 0;
-					ypos = 0;
+					xpos -= Lib.offset.x;
+					ypos -= Lib.offset.y;
 				}
 			}
 			ctx.save();

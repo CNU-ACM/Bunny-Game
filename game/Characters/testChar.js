@@ -11,45 +11,69 @@ function loadTestChar(playerName, worldArray, x, y) {
     });
 
     Lib("testChar").load(function () {
-        Lib("testChar").detach();
+
         Lib().addInputRule(function () {
             var character = Lib("testChar");
             character.stopAnimation();
 
             if (Lib().hasInputKey(39)) {
+                if (character.getNoScrollX() > window.innerWidth * 0.90) {
+                    Lib("testChar").detach();
+                    character.increaseScrollX();
+                }
+                else if (character.getNoScrollX() <= window.innerWidth * 0.90) {
+                    character.increaseX();
+                }
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 2);
                 character.setFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
                 character.reverseAnimation(false);
-                character.increaseX();
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(37)) {
+                if (character.getNoScrollX() < 50) {
+                    Lib("testChar").detach();
+                    character.decreaseScrollX();
+                }
+                else if (character.getNoScrollX() >= 50) {
+                    character.decreaseX();
+                }
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 3);
                 character.setFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
                 character.reverseAnimation(true);
-                character.decreaseX();
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(40)) {
+                if (character.getNoScrollY() > window.innerHeight * 0.90) {
+                    Lib("testChar").detach();
+                    character.increaseScrollY();
+                }
+                else if (character.getNoScrollY() <= window.innerHeight * 0.90) {
+                    character.increaseY();
+                }
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 0);
                 character.setFrames([0, 1, 2, 3, 4, 5, 6]);
                 character.reverseAnimation(false);
-                character.increaseY();
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(38)) {
+                if (character.getNoScrollY() < 50) {
+                    Lib("testChar").detach();
+                    character.decreaseScrollY();
+                }
+                else if (character.getNoScrollY() >= 50) {
+                    character.decreaseY();
+                }
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 1);
                 character.setFrames([0, 1, 2, 3, 4]);
                 character.reverseAnimation(false);
-                character.decreaseY();
                 character.resumeAnimation();
             }
 
-            var tileList = [[0, "speed", 70], [1, "speed", 40], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle]];
+            var tileList = [[0, "speed", 100], [1, "speed", 40], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle]];
             checkCollisionsBase(worldArray, character, 200, 250, tileList);
         });
     });
