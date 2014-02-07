@@ -92,6 +92,10 @@
 
 							var image = new Image();
 							image.src = listings.listings[rand].main_image;
+							image.addEventListener('click',function() {
+								//window.open(,"_blank");
+								console.log(listings.listings);
+							});
 							image.addEventListener('load',function() {
 								displayFrame.appendChild(image);
 								console.log(displayFrame.clientWidth);
@@ -107,7 +111,7 @@
 					});
 				}	
 					
-				// homeImage();	
+				homeImage();	
 
         	    // Get the player's world information here.
         	    var worldArray = [
