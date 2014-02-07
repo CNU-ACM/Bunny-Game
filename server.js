@@ -43,6 +43,21 @@ var server = http.createServer(function(req,res) {
 			res.writeHead(200);
 			res.end(JSON.stringify(rows));
 		});
+	} else if(url.match(/\/apis\/(.*)/gi)) {
+		res.writeHead(200);
+
+		var api = url.split("/apis/")[1];
+		http.get(api,function(response) {
+			var data = '';
+
+			response.on('data',function(chunk) {
+				data += chunk;
+			});
+
+			response.on('end',function() {
+				res.end(data);
+			});
+		});
 	} else {
 		fs.readFile(__dirname+'/'+url,function(err,data) {
 			if(err) {
@@ -64,21 +79,37 @@ if(process.env.OPENSHIFT_NODEJS_PORT) {
 
 var chars = [];
 var charDir = {length:0};
-var socket = io.listen(server).sockets.on('connection',function(client) {
+var socket = io.listen(server,{log:false}).sockets.on('connection',function(client) {
 	client.broadcast.emit('playerData',chars);
 	client.emit('welcome',{status:'welcome',data:chars});
 	client.on('playerData',function(data) {
-		chars.push(data);
 		charDir[client.id] = data;
 		charDir[client.id].index = charDir.length;
 		charDir[client.id].pid = client.id;
 		charDir.length++;
+
+		console.log("added char... ");
+		console.log(charDir[client.id]);
+
+		chars.push(charDir[client.id]);
+		console.log("... "+chars.length+" total");
 	});
 	client.on('disconnect',function() {
-		var id = client.id;
+		// var id = client.id;
+		// var index = 0;
 
-		chars.splice(charDir[id].index,1);
-		client.broadcast.emit('playerDisconnect',charDir[id]);
+		// console.log("disconnecting player...");
+
+		// for(var i=0;i<chars.length;i++) {
+		// 	if(chars[i].pid == id) index = i;
+		// }
+
+		// chars.splice(index,1);
+		// client.broadcast.emit('playerDisconnect',charDir[id]);
+
+		// console.log("char removed at index "+index);
+
+		// charDir.length--;
 	});
 });
 
