@@ -1,0 +1,28 @@
+#content {
+	width:1100px;
+	margin:20px auto;
+}
+
+#login {
+	display: none;
+	text-align: right;
+}
+
+#login-button {
+	float:right;
+}
+
+.hackpic {
+	display:block;
+	float:left;
+	padding:5px;
+	
+}
+#jumbo {
+	height:500px;
+	padding: 40px 75px;
+}
+
+.fb-login-button {
+	padding-right:35px;
+}
