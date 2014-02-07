@@ -14,42 +14,56 @@
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-
-
 <style type="text/css">
 body {
-  padding-top: 60px;
-  padding-bottom: 40px;
+	padding-top: 60px;
+	padding-bottom: 40px;
 }
 
 #content {
-  width:1100px;
-  margin:20px auto;
+	width:1100px;
+	margin:20px auto;
 }
 
 #login {
-  display: none;
-  text-align: right;
+	display: none;
+	text-align: right;
 }
 
 #login-button {
-  float:right;
+	float:right;
 }
 
 .hackpic {
-  display:block;
-  float:left;
-  padding:5px;
-  
+	display:block;
+	float:left;
+	padding:5px;
+	
 }
 #jumbo {
-  height:500px;
-  padding: 40px 75px;
+	height:500px;
+	padding: 40px 75px;
 }
 
 .fb-login-button {
-  padding-right:35px;
+	padding-right: 35px;
 }
+.member {
+	height:70px;
+}
+
+.member img {
+	margin-right: 15px;
+	float:left;
+	display: block;
+}
+
+.logo {
+	text-align: center;
+	margin:auto;
+	display:block;
+}
+
 </style>
 </head>
 
@@ -58,7 +72,7 @@ body {
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a href="index.html" class="navbar-brand">Plain Green Tees</a>
+      <a href="/" class="navbar-brand">Plain Green Tees / Hackathon 2014</a>
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -67,6 +81,8 @@ body {
     </div>
     <div class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
+        <li>
+        	<a href="about.html">About Us</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -87,20 +103,20 @@ body {
     cookie     : true, 
     xfbml      : true  
   });
-  var name = "";
+	var name = "";
     FB.Event.subscribe('auth.authResponseChange', function(response) {
     // Here we specify what we do with the response anytime this event occurs. 
     if (response.status === 'connected') {
       document.getElementById('login').style.display = "block";
-      //console.log(FB);
-      FB.api( "/"+response.authResponse.userID,
-      function (response) {
-        if (response && !response.error) {
-          writename(response.name);
-        }
-      }
-    );
-      
+    	//console.log(FB);
+    	FB.api( "/"+response.authResponse.userID,
+			function (response) {
+				if (response && !response.error) {
+					writename(response.name);
+				}
+			}
+		);
+    	
     } else if (response.status === 'not_authorized') {
       FB.login();
       document.getElementById('login').style.display = "none";
@@ -120,76 +136,101 @@ body {
    ref.parentNode.insertBefore(js, ref);
   }(document));
   function writename(name) {
-    document.getElementById("name").innerHTML = name;
+  	document.getElementById("name").innerHTML = name;
   }
 
-  window.onload = function() {
-      var loginbutton = document.getElementById("login-button");
-    loginbutton.addEventListener("click", function(){
-      window.location.href = "http://10.67.31.165:8888/game"
-    });
-    console.log(loginbutton);
-  };
+	window.onload = function() {
+	  	var loginbutton = document.getElementById("login-button");
+		loginbutton.addEventListener("click", function(){
+			window.location.href = "http://10.67.29.243:8888/game"
+		});
+		console.log(loginbutton);
+	};
   
 </script>
-  
-  
 
 </div>
 
-<div id="content">
+<div id="content"><br />
   <div class="row">
     <div class="col-lg-9">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Welcome!</h3>
-        </div>
-        <div class="panel-body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </div>
-    </div>
-    
-      <div id="login">
-      <div class="col-lg-3">
-        <div class="panel panel-primary">
-          <div class="panel-body">
-        Logged in as: <span id="name"></span><br /><br />
-        <button type="button" id="login-button" class="btn btn-default">Play Now!</button>
-          </div>
-        </div>
-        </div>
-      </div>
-      
+		<div class="panel panel-primary">
+	      <div class="panel-heading">
+	        <h3 class="panel-title">Welcome!</h3>
+	      </div>
+	      <div class="panel-body">
+	        The Plain Green Tees was created by CNU students S.Darling, G. McAlister, J. Peyton,  and J. Vallejo, inspired by top down graphics and MMO's interface. Susannah Darling designed the graphics, Gerald McAlister was the front end creater, Joseph Peyton did the web development, and Juan Vallejo did the technical backend. Instead of browsing through links, the Plain White Tees' game lets you browse by interacting with the game.
+	      </div>
+	    </div>
+	  </div>
+	    <div id="login">
+		  <div class="col-lg-3">
+		    <div class="panel panel-primary">
+		      <div class="panel-body">
+				Logged in as: <span id="name"></span><br /><br />
+				<button type="button" id="login-button" class="btn btn-default">Play Now!</button>
+		      </div>
+		    </div>
+	      </div>
+	    </div>
+	    
       
         <div class="row">
-        <div class="col-lg-4"> 
-          <div class="panel panel-default">
-            <div class="panel-heading">Who are we</div>
-            <div class="panel-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4"> 
-          <div class="panel panel-default">
-            <div class="panel-heading">What we made</div>
-            <div class="panel-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4"> 
-          <div class="panel panel-default">
-            <div class="panel-heading">Why and/or how we made it</div>
-              <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              </div>
-            </div>
-          </div>
-          </div>
+	      <div class="col-lg-4"> 
+	      	<div class="panel panel-default">
+	          <div class="panel-heading">The Team</div>
+	          <div class="panel-body">
+	            <div class="member" > 
+	            	<a href="http://www.facebook.com/squirrelarmies/"><img src="http://graph.facebook.com/squirrelarmies/picture" alt="member" width="48px" height="48px" />
+	            	<p>Joseph Peyton</a> - Junior<br />
+	            	Computer Engineering</p>
+	            </div>
+	            <div class="member" > 
+	            	<a href="http://www.facebook.com/gerald.mcalister/"><img src="https://graph.facebook.com/gerald.mcalister/picture" alt="member" width="48px" height="48px" />
+	            	Gerald Mcalister</a> - Senior<br />
+	            	Computer Engineering/Science
+	            </div>
+	            <div class="member" > 
+	            	<a href="http://www.facebook.com/juuanvallejo/"><img src="https://graph.facebook.com/juuanvallejo/picture" alt="member" width="48px" height="48px" />
+	            	Juan Vallejo</a> - Sophmore<br />
+	            	Computer Science
+	            </div>
+	            <div class="member" > 
+	            	<a href="http://www.facebook.com/soozi.darling/"><img src="https://graph.facebook.com/soozi.darling/picture" alt="member" width="48px" height="48px" />
+	            	Susannah Darling</a> - Junior<br />
+	            	Physics
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	      
+	      <div class="col-lg-8"> 
+	        <div class="panel panel-default">
+	          <div class="panel-heading">Products/Technology</div>
+	          <div class="panel-body">
+	            <div class="col-lg-4"> 
+	              <a href="http://getbootstrap.com/" target="_blank"><img class="logo" src="pics/logo1.jpg" alt="logo1" width="" height="50px" /></a><br />
+				  <a href="https://github.com/juanvallejo/Lib.js" target="_blank"><img class="logo" src="pics/logo2.jpg" alt="logo2" width="" height="50px" /></a><br />
+				  <a href="http://jquery.com/" target="_blank"><img class="logo" src="pics/logo3.png" alt="logo3" width="" height="50px" /></a><br />
+				  <a href="https://developers.facebook.com/" target="_blank"><img class="logo" src="pics/logo4.png" alt="logo4" width="" height="50px" /></a><br />
+				</div>
+				
+				<div class="col-lg-4"> 
+					<a href="http://www.appcelerator.com/" target="_blank"><img class="logo" src="pics/logo5.png" alt="logo5" width="" height="40px" /></a><br />
+					<a href="http://www.gimp.org/" target="_blank"><img class="logo" src="pics/logo6.jpg" alt="logo6" width="" height="50px" /></a><br />
+					<a href="http://www.systemax.jp/en/sai/" target="_blank"><img class="logo" src="pics/logo7.jpg" alt="logo7" width="" height="50px" /></a><br />
+					<a href="http://us.wacom.com/en/support" target="_blank"><img class="logo" src="pics/logo8.png" alt="logo8" width="" height="50px" /></a>
+				</div>
+				<div class="col-lg-4"> 
+					<a href="http://nodejs.org/" target="_blank"><img class="logo" src="pics/logo9.png" alt="logo9" width="" height="50px" /></a><br />
+					<a href="http://heliosapi.homes.com/docs/" target="_blank"><img class="logo" src="pics/logo10.jpg" alt="logo10" width="" height="40px" /></a><br />
+					<a href="http://lokeshdhakar.com/projects/lightbox2/ target="_blank""><img class="logo" src="pics/logo11.png" alt="logo11" width="" height="50px" /></a><br />
+					<a href="http://www.mysql.com/" target="_blank"><img class="logo" src="pics/logo12.png" alt="logo11" width="" height="50px" /></a>
+				</div>
+	          </div>
+	        </div>
+	      </div>
+	      </div>
           <div id="jumbo" class="jumbotron">
             <a href="pics/hackathon4.png" data-lightbox="hackathon"><img class="hackpic" src="pics/hackathon4.png" alt="hackathon4" width="269px" height="" /></a>
             <a href="pics/hackathon2.jpg" data-lightbox="hackathon"><img class="hackpic" src="pics/hackathon2.jpg" alt="hackathon2" width="175px" height="" /></a>
