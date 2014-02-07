@@ -30,8 +30,8 @@
         <canvas id="game-canvas" style="visibility:hidden; position:absolute; top:0; left:0;">
         </canvas>
 
-        <iframe id="display-frame" src="http://www.w3schools.com" style="visibility:hidden; position:absolute; left:50%; top:50%;">
-        </iframe>
+        <div id="display-frame" style="visibility:hidden; position:absolute; left:50%; top:50%;">
+        </div>
         <button id="close-display-frame" onclick="closeDisplayFrame()" style="visibility:hidden; position:fixed; left:50%; top:8%;">Close</button>
 
         <script>
@@ -57,13 +57,7 @@
 
         	window.onload = function () {
         	    var displayFrame = document.getElementById("display-frame");
-        	    displayFrame.style.width = window.innerWidth * 0.75 + "px";
-        	    displayFrame.style.height = window.innerHeight * 0.75 + "px";
-        	    displayFrame.style.marginLeft = (-displayFrame.clientWidth / 2) + "px";
-        	    displayFrame.style.marginTop = (-displayFrame.clientHeight / 2) + "px";
-
         	    var displayCloseButton = document.getElementById("close-display-frame");
-        	    displayCloseButton.style.marginLeft = (-displayCloseButton.clientWidth / 2) + "px";
 
         	    var loadingCanvas = document.getElementById("loading-canvas");
         	    loadingCanvas.width = window.innerWidth;
@@ -80,6 +74,40 @@
         	    gameCanvas.style.width = window.innerWidth + "px";
         	    gameCanvas.style.height = window.innerHeight + "px";
         	    Lib().setCanvas(gameCanvas);
+				
+				//apis
+				function homeImage() {
+					var xhr = new XMLHttpRequest();
+					xhr.open('GET','apis/http://heliosapi.homes.com/v1/listings/search?location.city=norfolk&pagesize=15&location.state=va&api_key=1-hdca-KXlP1VQn23y7BrcZEUxpMf',true);
+					xhr.send(null);
+					xhr.addEventListener('readystatechange',function() {
+						if(this.status == 200 && this.readyState == 4) {
+							var listings = JSON.parse(this.responseText);
+							var rand = Math.round(Math.random() * listings.listings.length)-1; //main_image
+							rand = rand < 0 ? 0 : rand;
+
+							var displayFrame = document.getElementById("display-frame");
+							var closeFrame = document.getElementById("close-display-frame");
+							displayFrame.style.visibility = "visible";
+
+							var image = new Image();
+							image.src = listings.listings[rand].main_image;
+							image.addEventListener('load',function() {
+								displayFrame.appendChild(image);
+								console.log(displayFrame.clientWidth);
+								
+								displayFrame.style.marginLeft = (-displayFrame.clientWidth / 2) + "px";
+			        	   		displayFrame.style.marginTop = (-displayFrame.clientHeight / 2) + "px";
+
+			        	   		closeFrame.style.visibility = "visible";
+			        	   		closeFrame.style.width = displayFrame.style.width;
+			        	   		closeFrame.style.marginLeft = (-displayCloseButton.clientWidth / 2) + "px";
+							});
+						}
+					});
+				}	
+					
+				homeImage();	
 
         	    // Get the player's world information here.
         	    var worldArray = [
@@ -141,8 +169,6 @@
         	                    y: charManager.mainChar.object.getY(),
         	                    size: charManager.mainChar.object.getSize()
         	                };
-
-        	                console.log(charManager.mainChar.data.size);
 
         	                socket.emit('playerData', charManager.mainChar.data);
         	            }
