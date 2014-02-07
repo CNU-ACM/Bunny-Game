@@ -5,8 +5,18 @@ else if(window.location.hostname == 'localhost') server = 'http://localhost:8888
 
 var socket = io.connect(server);
 var charManager = {
+	pids:[]
 	mainChar:{
 		spawned:false
+	},
+	hasChar:function(pid) {
+		var response = false;
+
+		if(pids.indexOf(pid) != -1) {
+			response = true;
+		}
+
+		return response;
 	}
 };
 
@@ -15,5 +25,20 @@ socket.on('welcome',function(res) {
 });
 
 socket.on('playerData',function(data) {
-	console.log("A PLAYER HAS FUCKING CONNECTED!");
+	console.log(data);
+	renderPlayer(data);
+
+	// function renderPlayer(data) {
+	// 	if(charManager.hasChar(pid)) {
+	// 		//if its already logged in and created
+	// 		Lib("").setX();
+	// 	} else {
+
+	// 	}
+	// }
+});
+
+socket.on('playerDisconnect',function(data) {
+	console.log("player disconnected.");
+	console.log(data);
 });
