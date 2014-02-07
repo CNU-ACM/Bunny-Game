@@ -25,6 +25,28 @@ function loadTestChar(playerName, worldArray, x, y) {
             Lib("testChar").setY(Lib("testChar").getNoScrollY() - Lib("testChar").getScrollY());
         }
 
+        Lib("testChar").click(function(e) {
+            var dirX = this.getNoScrollX() - e.pageX;
+            var dirY = this.getNoScrollX() - e.pageY;
+
+            if(dirX > 0)
+            {
+                // Left key press
+            }
+            else if(dirX < 0)
+            {
+                // Right key press
+            }
+
+            if(dirY > 0)
+            {
+                // Down key press
+            }
+            else if(dirY < 0)
+            {
+                // Up key press
+            }
+        });
         Lib().addInputRule(function () {
             var character = Lib("testChar");
             character.stopAnimation();

@@ -41,7 +41,7 @@
                         var image = new Image();
                         image.src = listings.listings[rand].main_image;
                         image.addEventListener('click',function() {
-
+                        	window.open("http://homes.com/"+listings.listings[rand].links.main,"_blank");
                         });
 
                         image.addEventListener('load', function () {
