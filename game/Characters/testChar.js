@@ -33,7 +33,7 @@ function loadTestChar(playerName, worldArray, x, y) {
             var heightTiles = 30 - 1;
 
             if (Lib().hasInputKey(39)) {
-                if (character.getNoScrollX() > window.innerWidth * 0.90 && character.getX() < (widthTiles * 102) - character.getWidth() - (character.getWidth() * 0.5)) {
+                if (character.getNoScrollX() > window.innerWidth * 0.90 && character.getX() < (widthTiles * 200) - character.getWidth() - (character.getWidth() * 0.5)) {
                     Lib("testChar").detach();
                     character.increaseScrollX();
                 }
@@ -62,7 +62,7 @@ function loadTestChar(playerName, worldArray, x, y) {
             }
             if (Lib().hasInputKey(40)) {
                 // console.log(character.getNoScrollY());
-                if (character.getNoScrollY() > window.innerHeight * 0.90 - character.getHeight() && character.getY() < (heightTiles * 121) - character.getHeight() * 0.5) {
+                if (character.getNoScrollY() > window.innerHeight * 0.90 - character.getHeight() && character.getY() < (heightTiles * 250) - character.getHeight() * 0.5) {
                     Lib("testChar").detach();
                     character.increaseScrollY();
                 }
@@ -91,7 +91,7 @@ function loadTestChar(playerName, worldArray, x, y) {
             }
 
             var tileList = [[0, "speed", 100], [1, "speed", 40], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle]];
-            checkCollisionsBase(worldArray, character, 102, 121, tileList);
+            checkCollisionsBase(worldArray, character, 200, 250, tileList);
         });
     });
 }
