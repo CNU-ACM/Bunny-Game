@@ -1,0 +1,36 @@
+{
+  "name": "mmo",
+  "version": "1.0.0",
+  "description": "Competition entry",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "mmo"
+  ],
+  "author": {
+    "name": "plain green tees",
+    "email": "gerald.mcalister.10@cnu.edu",
+    "url":  "http://mmo-plainbluetees.rhcloud.com/"
+  },
+  "homepage": "http://mmo-plainbluetees.rhcloud.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gemisis/plain-green-tees.git"
+  },
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+
+  "dependencies": {
+    "socket.io": ">= 0.9",
+    "mysql":"*"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js"
+}

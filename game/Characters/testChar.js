@@ -1,6 +1,6 @@
 function loadTestChar(playerName, worldArray, x, y) {
     Lib("testChar").sprite({
-        src:"Game/Graphics/Characters/bun.png",
+        src:"game/Graphics/Characters/bun.png",
         size:[712,712],
         position:[0, 0],
         speed:100,
@@ -9,7 +9,11 @@ function loadTestChar(playerName, worldArray, x, y) {
         x:x,
         y:y
     });
+
     Lib("testChar").load(function () {
+        socket.on('disconnect',function() {
+            Lib("testChar").hide();
+        });
         if (x > window.innerWidth * 0.90) {
             Lib("testChar").detach();
             Lib("testChar").setScrollX(x - (window.innerWidth * 0.90) + (window.innerWidth / 2));
