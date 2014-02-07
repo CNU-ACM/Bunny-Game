@@ -1,13 +1,15 @@
+#!/usr/bin/env node
+
 var http = require('http');
 var io = require('socket.io');
 var fs = require('fs');
 var mysql = require('mysql');
 
 var database = mysql.createConnection({
-	host:'127.0.0.1',
-	user:'root',
-	password:'',
-	database:'dabase'
+	host:process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1',
+	user:process.env.OPENSHIFT_MYSQL_DB_USER || 'root',
+	password:process.env.OPENSHIFT_MYSQL_DB_PASSWORD || '',
+	database:process.env.OPENSHIFT_MYSQL_DB_DB || 'dabase'
 });
 
 database.connect(function(err) {
@@ -54,7 +56,11 @@ var server = http.createServer(function(req,res) {
 	}
 });
 
-server.listen(8888);
+if(process.env.OPENSHIFT_NODEJS_PORT) {
+	server.listen(process.env.OPENSHIFT_NODEJS_PORT || 8888,process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
+} else {
+	server.listen(8888);
+}
 
 var chars = [];
 var socket = io.listen(server).sockets.on('connection',function(client) {
