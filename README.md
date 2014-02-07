@@ -8,3 +8,8 @@ user: root
 pass: (no password.. literally, like don't use these words as the password).
 
 database: dabase
+
+DNS:
+
+ns05.domaincontrol.com 
+ns06.domaincontrol.com
