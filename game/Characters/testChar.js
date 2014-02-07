@@ -61,7 +61,7 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(40)) {
-                console.log(character.getNoScrollY());
+                // console.log(character.getNoScrollY());
                 if (character.getNoScrollY() > window.innerHeight * 0.90 - character.getHeight() && character.getY() < (heightTiles * 121) - character.getHeight() * 0.5) {
                     Lib("testChar").detach();
                     character.increaseScrollY();
