@@ -107,8 +107,11 @@
 					});
 				}	
 					
+<<<<<<< HEAD
+=======
 				// homeImage();	
 
+>>>>>>> gemisis
         	    // Get the player's world information here.
         	    var worldArray = [
                         0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
