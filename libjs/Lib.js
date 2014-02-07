@@ -364,6 +364,12 @@ var Lib = {
 		if(keys == a.length) bool = true;
 		return bool;
 	},
+	addInputKey:function(a) {
+		Lib.keys[a] = true;
+	},
+	removeInputKey:function(a) {
+		Lib.keys[a] = false;
+	},
 	hasInputKey:function(a) {
 		return Lib.keys[a];
 	},
