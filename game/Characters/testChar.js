@@ -3,14 +3,23 @@ function loadTestChar(playerName, worldArray, x, y) {
         src:"Game/Graphics/Characters/bun.png",
         size:[712,712],
         position:[0, 0],
-        speed:70,
+        speed:100,
         scale:0.125,
         frequency: 13,
         x:x,
         y:y
     });
-
     Lib("testChar").load(function () {
+        if (x > window.innerWidth * 0.90) {
+            Lib("testChar").detach();
+            Lib("testChar").setScrollX(x - (window.innerWidth * 0.90) + (window.innerWidth / 2));
+            Lib("testChar").setX(Lib("testChar").getNoScrollX() - Lib("testChar").getScrollX());
+        }
+        if (y > window.innerHeight * 0.90) {
+            Lib("testChar").detach();
+            Lib("testChar").setScrollY(y - (window.innerHeight * 0.90) + (window.innerHeight / 2));
+            Lib("testChar").setY(Lib("testChar").getNoScrollY() - Lib("testChar").getScrollY());
+        }
 
         Lib().addInputRule(function () {
             var character = Lib("testChar");
