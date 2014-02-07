@@ -19,6 +19,37 @@
                 document.getElementById("close-display-frame").style.visibility = "hidden";
             }
 
+            //apis
+            function homeImage() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'apis/http://heliosapi.homes.com/v1/listings/search?location.city=norfolk&pagesize=15&location.state=va&api_key=1-hdca-KXlP1VQn23y7BrcZEUxpMf', true);
+                xhr.send(null);
+                xhr.addEventListener('readystatechange', function () {
+                    if (this.status == 200 && this.readyState == 4) {
+                        var listings = JSON.parse(this.responseText);
+                        var rand = Math.round(Math.random() * listings.listings.length) - 1; //main_image
+                        rand = rand < 0 ? 0 : rand;
+
+                        var displayFrame = document.getElementById("display-frame");
+                        var closeFrame = document.getElementById("close-display-frame");
+                        displayFrame.style.visibility = "visible";
+
+                        var image = new Image();
+                        image.src = listings.listings[rand].main_image;
+                        image.addEventListener('load', function () {
+                            displayFrame.appendChild(image);
+                            console.log(displayFrame.clientWidth);
+
+                            displayFrame.style.marginLeft = (-displayFrame.clientWidth / 2) + "px";
+                            displayFrame.style.marginTop = (-displayFrame.clientHeight / 2) + "px";
+
+                            closeFrame.style.visibility = "visible";
+                            closeFrame.style.width = displayFrame.style.width;
+                            closeFrame.style.marginLeft = (-displayCloseButton.clientWidth / 2) + "px";
+                        });
+                    }
+                });
+            }	
         </script>
     </head>
 
@@ -75,43 +106,11 @@
         	    gameCanvas.style.height = window.innerHeight + "px";
         	    Lib().setCanvas(gameCanvas);
 				
-				//apis
-				function homeImage() {
-					var xhr = new XMLHttpRequest();
-					xhr.open('GET','apis/http://heliosapi.homes.com/v1/listings/search?location.city=norfolk&pagesize=15&location.state=va&api_key=1-hdca-KXlP1VQn23y7BrcZEUxpMf',true);
-					xhr.send(null);
-					xhr.addEventListener('readystatechange',function() {
-						if(this.status == 200 && this.readyState == 4) {
-							var listings = JSON.parse(this.responseText);
-							var rand = Math.round(Math.random() * listings.listings.length)-1; //main_image
-							rand = rand < 0 ? 0 : rand;
-
-							var displayFrame = document.getElementById("display-frame");
-							var closeFrame = document.getElementById("close-display-frame");
-							displayFrame.style.visibility = "visible";
-
-							var image = new Image();
-							image.src = listings.listings[rand].main_image;
-							image.addEventListener('load',function() {
-								displayFrame.appendChild(image);
-								console.log(displayFrame.clientWidth);
-								
-								displayFrame.style.marginLeft = (-displayFrame.clientWidth / 2) + "px";
-			        	   		displayFrame.style.marginTop = (-displayFrame.clientHeight / 2) + "px";
-
-			        	   		closeFrame.style.visibility = "visible";
-			        	   		closeFrame.style.width = displayFrame.style.width;
-			        	   		closeFrame.style.marginLeft = (-displayCloseButton.clientWidth / 2) + "px";
-							});
-						}
-					});
-				}	
-					
 				// homeImage();	
 
         	    // Get the player's world information here.
         	    var worldArray = [
-                        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 4, 5, 4, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         2, 0, 2, 0, 0, 2, 2, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -158,7 +157,7 @@
         	            }
         	        });
 
-        	        loadCharacter("testPlayer", 0, worldArray, 2000, 0);
+        	        loadCharacter("testPlayer", 0, worldArray, 0, 0);
         	        socket.on('welcome', function () {
         	            if (!charManager.mainChar.spawned) {
         	                charManager.mainChar.spawned = true;

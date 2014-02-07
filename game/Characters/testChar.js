@@ -4,7 +4,7 @@ function loadTestChar(playerName, worldArray, x, y) {
         size:[712,712],
         position:[0, 0],
         speed:100,
-        scale:0.125,
+        scale:0.25,
         frequency: 13,
         x:x,
         y:y
@@ -90,10 +90,16 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
 
-            var tileList = [[0, "speed", 100], [1, "speed", 40], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle]];
+            var tileList = [[0, "speed", 150], [1, "speed", 80], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle],
+            [4, "keyInteract", "houseTile", 32, houseHandle], [5, "keyInteract", "houseTile", 32, houseHandle]];
             checkCollisionsBase(worldArray, character, 200, 250, tileList);
         });
     });
+}
+
+function houseHandle(x, y) {
+    console.log("testing");
+    homeImage();
 }
 
 function chestHandle(x, y) {
