@@ -56,3 +56,12 @@ var server = http.createServer(function(req,res) {
 
 server.listen(8888);
 
+var chars = [];
+var socket = io.listen(server).sockets.on('connection',function(client) {
+	client.emit('welcome',{status:'welcome',data:chars});
+	client.on('playerData',function(data) {
+		chars.push(data);
+		console.log("chars now contains "+chars.length+" data");
+	});
+});
+

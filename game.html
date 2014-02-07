@@ -11,6 +11,8 @@
         <script src="game/Worlds/testWorld.js"></script>
         <script src="game/Characters/baseChar.js"></script>
         <script src="game/Characters/testChar.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="game/multiplayer.js"></script>
     </head>
 
     <body style="overflow:hidden; padding:0; margin:0; ">
@@ -57,7 +59,19 @@
                 loadWorld("testPlayer", "defaultRoom", 0, worldArray, 0, 0);
 
                 Lib().load(function () {
-                    loadCharacter("testPlayer", 0, worldArray, 1100, 0);
+                    socket.on('connect',function() {
+                        if(charManager.mainChar.spawned) {
+                            Lib("testChar").show();
+                        }
+                    });
+                    
+                    socket.on('welcome',function() {
+                        if(!charManager.mainChar.spawned) {
+                            charManager.mainChar.spawned = true;
+                            loadCharacter("testPlayer", 0, worldArray, 1100, 0);
+                            socket.emit('playerData',{data:'shit'});
+                        }
+                    });
                 });
 
                 var loadingCanvas = document.getElementById("loading-canvas");

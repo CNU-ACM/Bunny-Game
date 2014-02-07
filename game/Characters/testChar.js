@@ -11,6 +11,10 @@ function loadTestChar(playerName, worldArray, x, y) {
     });
 
     Lib("testChar").load(function () {
+        socket.on('disconnect',function() {
+            Lib("testChar").hide();
+            console.log(Lib("testChar"));
+        });
 
         Lib().addInputRule(function () {
             var character = Lib("testChar");
