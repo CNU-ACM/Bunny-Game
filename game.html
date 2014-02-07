@@ -65,11 +65,21 @@
                         }
                     });
                     
+                    loadCharacter("testPlayer", 0, worldArray, 1100, 0);
                     socket.on('welcome',function() {
                         if(!charManager.mainChar.spawned) {
                             charManager.mainChar.spawned = true;
-                            loadCharacter("testPlayer", 0, worldArray, 1100, 0);
-                            socket.emit('playerData',{data:'shit'});
+                            charManager.mainChar.object = Lib("testChar");
+                            charManager.mainChar.data = {
+                                id:charManager.mainChar.object.id,
+                                x:charManager.mainChar.object.getX(),
+                                y:charManager.mainChar.object.getY(),
+                                size:charManager.mainChar.object.getSize()
+                            };
+
+                            console.log(charManager.mainChar.data.size);
+
+                            socket.emit('playerData',charManager.mainChar.data);
                         }
                     });
                 });

@@ -13,7 +13,6 @@ function loadTestChar(playerName, worldArray, x, y) {
     Lib("testChar").load(function () {
         socket.on('disconnect',function() {
             Lib("testChar").hide();
-            console.log(Lib("testChar"));
         });
         if (x > window.innerWidth * 0.90) {
             Lib("testChar").detach();

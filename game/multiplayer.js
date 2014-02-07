@@ -8,3 +8,7 @@ var charManager = {
 socket.on('welcome',function(res) {
 	console.log(res);
 });
+
+socket.on('playerData',function(data) {
+	console.log("A PLAYER HAS FUCKING CONNECTED!");
+});

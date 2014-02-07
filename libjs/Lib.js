@@ -94,6 +94,9 @@ var Lib = {
         setScrollY:function(a){
             Lib.offset.y = a;
         },
+        getSize:function() {
+        	return this.size;
+        },
         getScrollX:function(){
             return Lib.offset.x;
         },
@@ -618,6 +621,7 @@ var Lib = {
 			id:Lib.id,
 			x:settings.x,
 			y:settings.y,
+			size:settings.size,
 			speed:settings.speed,
 			settings:settings,
 			image:new Image(),
