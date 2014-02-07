@@ -59,6 +59,28 @@ function loadTestWorld(playerName, worldSpot, worldArray, x, y) {
                         hidden: false
                     });
                     break;
+                case 4:
+                    Lib("houseTile" + (x + y * widthTiles)).sprite({
+                        src: "game/Graphics/Tiles/masterTiles.png",
+                        size: [200, 250],
+                        position: [200 * 1, 250 * 0],
+                        speed: 70,
+                        frequency: 0,
+                        x: x * 200,
+                        y: y * 250
+                    });
+                    break;
+                case 5:
+                    Lib("houseTile" + (x + y * widthTiles)).sprite({
+                        src: "game/Graphics/Tiles/masterTiles.png",
+                        size: [200, 250],
+                        position: [200 * 5, 250 * 1],
+                        speed: 70,
+                        frequency: 0,
+                        x: x * 200,
+                        y: y * 250
+                    });
+                    break;
             }
         }
     }
