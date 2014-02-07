@@ -3,8 +3,6 @@ var iojs = 'https://mmo-greenteam.rhcloud.com:8443/socket.io/socket.io.js';
 if(window.location.hostname == 'mmo-greenteam.rhcloud.com') server = 'https://mmo-greenteam.rhcloud.com:8443/';
 else if(window.location.hostname == 'localhost') server = 'http://localhost:8888';
 
-console.log(window.location.hostname);
-
 var socket = io.connect(server);
 var charManager = {
 	mainChar:{
