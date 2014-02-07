@@ -59,6 +59,7 @@
                 loadWorld("testPlayer", "defaultRoom", 0, worldArray, 0, 0);
 
                 Lib().load(function () {
+<<<<<<< HEAD
                     socket.on('connect',function() {
                         if(charManager.mainChar.spawned) {
                             Lib("testChar").show();
@@ -72,6 +73,9 @@
                             socket.emit('playerData',{data:'shit'});
                         }
                     });
+=======
+                    loadCharacter("testPlayer", 0, worldArray, 0, 0);
+>>>>>>> gemisis
                 });
 
                 var loadingCanvas = document.getElementById("loading-canvas");

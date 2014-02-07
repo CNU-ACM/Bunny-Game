@@ -9,12 +9,13 @@ function loadTestChar(playerName, worldArray, x, y) {
         x:x,
         y:y
     });
-
     Lib("testChar").load(function () {
+<<<<<<< HEAD
         socket.on('disconnect',function() {
             Lib("testChar").hide();
             console.log(Lib("testChar"));
         });
+=======
         if (x > window.innerWidth * 0.90) {
             Lib("testChar").detach();
             Lib("testChar").setScrollX(x - (window.innerWidth * 0.90) + (window.innerWidth / 2));
@@ -25,6 +26,7 @@ function loadTestChar(playerName, worldArray, x, y) {
             Lib("testChar").setScrollY(y - (window.innerHeight * 0.90) + (window.innerHeight / 2));
             Lib("testChar").setY(Lib("testChar").getNoScrollY() - Lib("testChar").getScrollY());
         }
+>>>>>>> gemisis
 
         Lib().addInputRule(function () {
             var character = Lib("testChar");
