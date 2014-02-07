@@ -13,6 +13,13 @@
         <script src="https://mmo-greenteam.rhcloud.com:8443/socket.io/socket.io.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="game/multiplayer.js"></script>
+        <script>
+            function closeDisplayFrame() {
+                document.getElementById("display-frame").style.visibility = "hidden";
+                document.getElementById("close-display-frame").style.visibility = "hidden";
+            }
+
+        </script>
     </head>
 
     <body style="overflow:hidden; padding:0; margin:0; ">
@@ -20,8 +27,12 @@
         <canvas id="loading-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%;">
         </canvas>
         
-        <canvas id="game-canvas" style="visibility:; position:absolute; top:0; left:0;">
+        <canvas id="game-canvas" style="visibility:hidden; position:absolute; top:0; left:0;">
         </canvas>
+
+        <iframe id="display-frame" src="http://www.w3schools.com" style="visibility:hidden; position:absolute; left:50%; top:50%;">
+        </iframe>
+        <button id="close-display-frame" onclick="closeDisplayFrame()" style="visibility:hidden; position:fixed; left:50%; top:8%;">Close</button>
 
         <script>
 
@@ -44,25 +55,34 @@
 	            }
         	});
 
-            window.onload = function () {
-            	var loadingCanvas = document.getElementById("loading-canvas");
-                loadingCanvas.width = window.innerWidth;
-                loadingCanvas.height = window.innerHeight;
-                loadingCanvas.style.width = "100%";
-                loadingCanvas.style.height = "100%";
+        	window.onload = function () {
+        	    var displayFrame = document.getElementById("display-frame");
+        	    displayFrame.style.width = window.innerWidth * 0.75 + "px";
+        	    displayFrame.style.height = window.innerHeight * 0.75 + "px";
+        	    displayFrame.style.marginLeft = (-displayFrame.clientWidth / 2) + "px";
+        	    displayFrame.style.marginTop = (-displayFrame.clientHeight / 2) + "px";
 
-                Lib().setCanvas(loadingCanvas);
-                Lib("loader").sprite({ src: "game/Graphics/loading.png", size: [128, 128], frequency: 20, x: 'center', y: 'center'});
+        	    var displayCloseButton = document.getElementById("close-display-frame");
+        	    displayCloseButton.style.marginLeft = (-displayCloseButton.clientWidth / 2) + "px";
 
-                var gameCanvas = document.getElementById("game-canvas");
-                gameCanvas.width = window.innerWidth;
-                gameCanvas.height = window.innerHeight;
-                gameCanvas.style.width = window.innerWidth+"px";
-                gameCanvas.style.height = window.innerHeight+"px";
-                Lib().setCanvas(gameCanvas);
+        	    var loadingCanvas = document.getElementById("loading-canvas");
+        	    loadingCanvas.width = window.innerWidth;
+        	    loadingCanvas.height = window.innerHeight;
+        	    loadingCanvas.style.width = "100%";
+        	    loadingCanvas.style.height = "100%";
 
-                // Get the player's world information here.
-                var worldArray = [
+        	    Lib().setCanvas(loadingCanvas);
+        	    Lib("loader").sprite({ src: "game/Graphics/loading.png", size: [128, 128], frequency: 20, x: 'center', y: 'center' });
+
+        	    var gameCanvas = document.getElementById("game-canvas");
+        	    gameCanvas.width = window.innerWidth;
+        	    gameCanvas.height = window.innerHeight;
+        	    gameCanvas.style.width = window.innerWidth + "px";
+        	    gameCanvas.style.height = window.innerHeight + "px";
+        	    Lib().setCanvas(gameCanvas);
+
+        	    // Get the player's world information here.
+        	    var worldArray = [
                         0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -96,44 +116,44 @@
                     ];
 
 
-                var loadingCanvas = document.getElementById("loading-canvas");
-                var gameCanvas = document.getElementById("game-canvas");
-                loadingCanvas.style.visibility = "visible";
-                gameCanvas.style.visibility = "hidden";
+        	    var loadingCanvas = document.getElementById("loading-canvas");
+        	    var gameCanvas = document.getElementById("game-canvas");
+        	    loadingCanvas.style.visibility = "visible";
+        	    gameCanvas.style.visibility = "hidden";
 
-                loadWorld("testPlayer", "defaultRoom", 0, worldArray, 0, 0);
+        	    loadWorld("testPlayer", "defaultRoom", 0, worldArray, 0, 0);
 
-                Lib().load(function () {
-                    socket.on('connect',function() {
-                        if(charManager.mainChar.spawned) {
-                            Lib("testChar").show();
-                        }
-                    });
-                    
-                    loadCharacter("testPlayer", 0, worldArray, 2000, 0);
-                    socket.on('welcome',function() {
-                        if(!charManager.mainChar.spawned) {
-                            charManager.mainChar.spawned = true;
-                            charManager.mainChar.object = Lib("testChar");
-                            charManager.mainChar.data = {
-                                id:charManager.mainChar.object.id,
-                                x:charManager.mainChar.object.getX(),
-                                y:charManager.mainChar.object.getY(),
-                                size:charManager.mainChar.object.getSize()
-                            };
+        	    Lib().load(function () {
+        	        socket.on('connect', function () {
+        	            if (charManager.mainChar.spawned) {
+        	                Lib("testChar").show();
+        	            }
+        	        });
 
-                            console.log(charManager.mainChar.data.size);
+        	        loadCharacter("testPlayer", 0, worldArray, 2000, 0);
+        	        socket.on('welcome', function () {
+        	            if (!charManager.mainChar.spawned) {
+        	                charManager.mainChar.spawned = true;
+        	                charManager.mainChar.object = Lib("testChar");
+        	                charManager.mainChar.data = {
+        	                    id: charManager.mainChar.object.id,
+        	                    x: charManager.mainChar.object.getX(),
+        	                    y: charManager.mainChar.object.getY(),
+        	                    size: charManager.mainChar.object.getSize()
+        	                };
 
-                            socket.emit('playerData',charManager.mainChar.data);
-                        }
-                    });
-                });
+        	                console.log(charManager.mainChar.data.size);
 
-                var loadingCanvas = document.getElementById("loading-canvas");
-                var gameCanvas = document.getElementById("game-canvas");
-                loadingCanvas.style.visibility = "hidden";
-                gameCanvas.style.visibility = "visible";
-            }
+        	                socket.emit('playerData', charManager.mainChar.data);
+        	            }
+        	        });
+        	    });
+
+        	    var loadingCanvas = document.getElementById("loading-canvas");
+        	    var gameCanvas = document.getElementById("game-canvas");
+        	    loadingCanvas.style.visibility = "hidden";
+        	    gameCanvas.style.visibility = "visible";
+        	}
         </script>
 
     </body>

@@ -42,7 +42,7 @@ function loadTestChar(playerName, worldArray, x, y) {
                 }
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 2);
-                character.setFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+                character.setFrames([1, 2, 3, 4, 5, 6, 7]);
                 character.reverseAnimation(false);
                 character.resumeAnimation();
             }
@@ -56,8 +56,8 @@ function loadTestChar(playerName, worldArray, x, y) {
                 }
                 character.setSpriteX(712 * 0);
                 character.setSpriteY(712 * 3);
-                character.setFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
                 character.reverseAnimation(true);
+                character.setFrames([3, 4, 5, 6, 7, 8, 9]);
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(40)) {
