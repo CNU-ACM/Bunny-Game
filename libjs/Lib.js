@@ -62,6 +62,7 @@ var Lib = {
 	canvas:null,
 	canvases:[],
 	ctx:null,
+    offset:{x:0,y:0},
 	detached:null,
 	entities:{},
 	entityExists:{},
@@ -84,7 +85,43 @@ var Lib = {
 		detach:function() {
 			Lib.detached = this;
 			this._detach = true;
+            Lib.detached.storedX = this.getX();
+            Lib.detached.storedY = this.getY();
 		},
+        setScrollX:function(a){
+            Lib.offset.x = a;
+        },
+        setScrollY:function(a){
+            Lib.offset.y = a;
+        },
+        getSize:function() {
+        	return this.size;
+        },
+        getScrollX:function(){
+            return Lib.offset.x;
+        },
+        getScrollY:function(){
+            return Lib.offset.y;
+        },
+		increaseScrollX:function(a) {
+			if(a) Lib.offset.x += (this.speed * time.dt) * a;
+			else Lib.offset.x += this.speed * time.dt;
+		},
+		increaseScrollY:function(a) {
+			if(a) Lib.offset.y += (this.speed * time.dt) * a;
+			else Lib.offset.y += this.speed * time.dt;
+		},
+		decreaseScrollX:function(a) {
+			if(a) Lib.offset.x -= (this.speed * time.dt) * a;
+			else Lib.offset.x -= this.speed * time.dt;
+		},
+		decreaseScrollY:function(a) {
+			if(a) Lib.offset.y -= (this.speed * time.dt) * a;
+			else Lib.offset.y -= this.speed * time.dt;
+		},
+        isDetached:function(){
+            return (Lib.detached !== null);
+        },
 		click:function(a) {
 			requireID();
 			if(!Lib.eventQueue[Lib.id]) Lib.eventQueue[Lib.id] = [];
@@ -196,9 +233,21 @@ var Lib = {
 			return this.settings.size[0] || this.getLineWidth();
 		},
 		getX:function() {
-			return this.x;
+			return this.x + Lib.offset.x;
 		},
 		getY:function() {
+			return this.y + Lib.offset.y;
+		},
+		getNoScrollX:function() {
+			return this.x;
+		},
+		getNoScrollY:function() {
+			return this.y;
+		},
+		getNoScrollX:function() {
+			return this.x;
+		},
+		getNoScrollY:function() {
 			return this.y;
 		},
 		hide:function() {
@@ -572,6 +621,7 @@ var Lib = {
 			id:Lib.id,
 			x:settings.x,
 			y:settings.y,
+			size:settings.size,
 			speed:settings.speed,
 			settings:settings,
 			image:new Image(),
@@ -730,11 +780,8 @@ function render() {
 			var ypos = Lib.canvases[i].objects[x].y;
 			if(Lib.detached) {
 				if(Lib.detached.id != Lib.canvases[i].objects[x].id) {
-					xpos -= Lib.detached.getX();
-					ypos -= Lib.detached.getY();
-				} else {
-					xpos = 0;
-					ypos = 0;
+					xpos -= Lib.offset.x;
+					ypos -= Lib.offset.y;
 				}
 			}
 			ctx.save();
