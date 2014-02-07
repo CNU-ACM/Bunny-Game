@@ -5,18 +5,40 @@ else if(window.location.hostname == 'localhost') server = 'http://localhost:8888
 
 var socket = io.connect(server);
 var charManager = {
-	pids:[]
+	pids:[],
 	mainChar:{
 		spawned:false
 	},
 	hasChar:function(pid) {
 		var response = false;
 
-		if(pids.indexOf(pid) != -1) {
+		if(this.pids.indexOf(pid) != -1) {
 			response = true;
 		}
 
 		return response;
+	},
+	render:function(data) {
+		if(charManager.hasChar(data.pid)) {
+			console.log("rendering existing player");
+		} else {
+			console.log("---new---");
+			console.log(data);
+			Lib(data.pid).sprite({
+				src:"game/Graphics/Characters/bun.png",
+        		size:data.size,
+        		position:[0, 0],
+        		speed:100,
+        		scale:0.125,
+        		frequency:13,
+        		x:data.x,
+        		y:data.y
+			});
+
+			Lib(data.pid).load(function() {
+				console.log("foreign player has loaded");
+			});
+		}
 	}
 };
 
@@ -25,20 +47,13 @@ socket.on('welcome',function(res) {
 });
 
 socket.on('playerData',function(data) {
+	console.log("data-----");
 	console.log(data);
-	renderPlayer(data);
-
-	// function renderPlayer(data) {
-	// 	if(charManager.hasChar(pid)) {
-	// 		//if its already logged in and created
-	// 		Lib("").setX();
-	// 	} else {
-
-	// 	}
-	// }
+	charManager.render(data);
 });
 
 socket.on('playerDisconnect',function(data) {
 	console.log("player disconnected.");
 	console.log(data);
+	// console.log(data);
 });

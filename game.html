@@ -61,6 +61,22 @@
                 gameCanvas.style.height = window.innerHeight+"px";
                 Lib().setCanvas(gameCanvas);
 
+                //apis
+                function homeImage(fn) {
+                	var xhr = new XMLHttpRequest();
+                	xhr.open('GET','apis/http://heliosapi.homes.com/v1/listings/search?location.city=norfolk&pagesize=15&location.state=va&api_key=1-hdca-KXlP1VQn23y7BrcZEUxpMf',true);
+                	xhr.send(null);
+                	xhr.addEventListener('readystatechange',function() {
+                		if(this.status == 200 && this.readyState == 4) {
+                			var listings = JSON.parse(this.responseText);
+                			var rand = Math.round(Math.random() * listings.listings.length)-1; //main_image
+                			rand = rand < 0 ? 0 : rand;
+
+                			if(typeof fn == 'function') fn.call(this,listings.listings[rand].main_image);
+                		}
+                	});
+                }
+
                 // Get the player's world information here.
                 var worldArray = [
                         0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -121,8 +137,6 @@
                                 y:charManager.mainChar.object.getY(),
                                 size:charManager.mainChar.object.getSize()
                             };
-
-                            console.log(charManager.mainChar.data.size);
 
                             socket.emit('playerData',charManager.mainChar.data);
                         }
