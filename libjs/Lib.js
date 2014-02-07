@@ -51,6 +51,9 @@ Sprite.prototype.render = function(ctx) {
 	if(this.scale) {
 		width *= this.scale;
 		height *= this.scale;
+
+		this.width = width;
+		this.height = height;
 	}
 
 	ctx.drawImage(Lib.resources[this.url],x,y,this.size[0],this.size[1],0,0,width,height);
@@ -73,6 +76,9 @@ var Lib = {
 	readyEvents:[],
 	resources:{},
 	events:{
+		detach:function() {
+			this._detach = true;
+		},
 		click:function(a) {
 			requireID();
 			if(!Lib.eventQueue[Lib.id]) Lib.eventQueue[Lib.id] = [];
@@ -83,7 +89,7 @@ var Lib = {
 			//this.stopAnimation();
 		},
 		getHeight:function() {
-			return this.sprite.size[1];
+			return this.sprite.scale ? this.sprite.height : this.sprite.size[1];
 		},
 		getSpriteWidth:function() {
 			return this.sprite.src.width || this.settings.size[0];
@@ -95,7 +101,7 @@ var Lib = {
 			return this.sprite.pos[1];
 		},
 		getWidth:function() {
-			return this.sprite.size[0];
+			return this.sprite.scale ? this.sprite.width : this.sprite.size[0];
 		},
 		load:function(a) {
 			requireID();
@@ -613,7 +619,6 @@ var Lib = {
 			self.sprite = new Sprite(self.settings.src,self.settings.size,self.settings.frequency,self.settings.position,self.settings.direction,self.settings.frames,self.canvas);
 			if(self.settings.reverse) self.sprite.reverseAnimation = true;
 			if(self.settings.scale) self.sprite.scale = self.settings.scale;
-			
 			Lib.addObject(self,self.id);
 			Lib.resources[self.settings.src] = this;
 			if(Lib.eventQueue[self.id]) {

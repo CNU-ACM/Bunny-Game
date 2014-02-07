@@ -4,13 +4,14 @@ function loadTestChar(playerName, worldArray, x, y) {
         size:[50,100],
         position:[0,200],
         speed:70,
+        // scale:0.5,
         frequency: 13,
         x:x,
         y:y
     });
 
     Lib("testChar").load(function () {
-
+        Lib("testChar").detach();
         Lib().addInputRule(function () {
             var character = Lib("testChar");
             character.stopAnimation();
