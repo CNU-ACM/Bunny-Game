@@ -26,7 +26,7 @@ function loadTestChar(playerName, worldArray, x, y) {
             character.stopAnimation();
 
             if (Lib().hasInputKey(39)) {
-                if (character.getNoScrollX() > window.innerWidth * 0.90) {
+                if (character.getNoScrollX() > window.innerWidth * 0.90 && character.getX() < (13 * 102) * 0.90) {
                     Lib("testChar").detach();
                     character.increaseScrollX();
                 }
@@ -40,11 +40,11 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(37)) {
-                if (character.getNoScrollX() < 50) {
+                if (character.getNoScrollX() < 50 && character.getScrollX() > 0) {
                     Lib("testChar").detach();
                     character.decreaseScrollX();
                 }
-                else if (character.getNoScrollX() >= 50) {
+                else if (character.getNoScrollX() >= 0 || character.getScrollX() > 0) {
                     character.decreaseX();
                 }
                 character.setSpriteX(712 * 0);
@@ -54,7 +54,7 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(40)) {
-                if (character.getNoScrollY() > window.innerHeight * 0.90) {
+                if (character.getNoScrollY() > window.innerHeight * 0.90 && character.getY() < (10 * 121) * 0.90) {
                     Lib("testChar").detach();
                     character.increaseScrollY();
                 }
@@ -68,11 +68,11 @@ function loadTestChar(playerName, worldArray, x, y) {
                 character.resumeAnimation();
             }
             if (Lib().hasInputKey(38)) {
-                if (character.getNoScrollY() < 50) {
+                if (character.getNoScrollY() < 50 && character.getScrollY() > 0) {
                     Lib("testChar").detach();
                     character.decreaseScrollY();
                 }
-                else if (character.getNoScrollY() >= 50) {
+                else if (character.getNoScrollY() >= 0 || character.getScrollY() > 0) {
                     character.decreaseY();
                 }
                 character.setSpriteX(712 * 0);
@@ -83,7 +83,7 @@ function loadTestChar(playerName, worldArray, x, y) {
             }
 
             var tileList = [[0, "speed", 100], [1, "speed", 40], [2, "stop"], [3, "keyInteract", "treasureTile", 32, chestHandle]];
-            checkCollisionsBase(worldArray, character, 200, 250, tileList);
+            checkCollisionsBase(worldArray, character, 102, 121, tileList);
         });
     });
 }
