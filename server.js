@@ -63,14 +63,22 @@ if(process.env.OPENSHIFT_NODEJS_PORT) {
 }
 
 var chars = [];
+var charDir = {length:0};
 var socket = io.listen(server).sockets.on('connection',function(client) {
-	client.broadcast.emit('playerData',{data:chars});
+	client.broadcast.emit('playerData',chars);
 	client.emit('welcome',{status:'welcome',data:chars});
 	client.on('playerData',function(data) {
 		chars.push(data);
+		charDir[client.id] = data;
+		charDir[client.id].index = charDir.length;
+		charDir[client.id].pid = client.id;
+		charDir.length++;
 	});
 	client.on('disconnect',function() {
-		
+		var id = client.id;
+
+		chars.splice(charDir[id].index,1);
+		client.broadcast.emit('playerDisconnect',charDir[id]);
 	});
 });
 
