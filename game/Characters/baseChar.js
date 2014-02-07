@@ -8,7 +8,7 @@ function loadCharacter(playerName, characterID, worldArray, x, y) {
 
 function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileList) {
     var x = (character.getX() + character.getWidth() / 2) / tileWidth;
-    var y = (character.getY() + 80) / tileHeight;
+    var y = (character.getY() + (character.getHeight() * 0.8)) / tileHeight;
     x = Math.floor(x);
     y = Math.floor(y);
 
@@ -20,7 +20,7 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
 
     // Top side collisions
     x = (character.getX() + character.getWidth() / 2) / tileWidth;
-    y = (character.getY() + 50) / tileHeight;
+    y = (character.getY() + (character.getHeight() * 0.5)) / tileHeight;
     x = Math.floor(x);
     y = Math.floor(y);
     for (var i = 0; i < tileList.length; i += 1) {
@@ -100,7 +100,7 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
 
     // Interaction Top side collisions
     x = (character.getX() + character.getWidth() / 2) / tileWidth;
-    y = (character.getY() + 50 - 10) / tileHeight;
+    y = (character.getY() + (character.getHeight() * 0.4)) / tileHeight;
     x = Math.floor(x);
     y = Math.floor(y);
     for (var i = 0; i < tileList.length; i += 1) {
@@ -116,7 +116,7 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
     }
 
     // Interaction Left side collisions
-    x = (character.getX() - 10) / tileWidth;
+    x = (character.getX() - (character.getWidth() * 0.1)) / tileWidth;
     y = (character.getY() + character.getHeight() / 2) / tileHeight;
     x = Math.floor(x);
     y = Math.floor(y);
@@ -133,7 +133,7 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
     }
 
     // Interaction Right side collisions
-    x = (character.getX() + character.getWidth() + 10) / tileWidth;
+    x = (character.getX() + character.getWidth() + (character.getWidth() * 0.1)) / tileWidth;
     y = (character.getY() + character.getHeight() / 2) / tileHeight;
     x = Math.floor(x);
     y = Math.floor(y);
@@ -151,7 +151,7 @@ function checkCollisionsBase(worldArray, character, tileWidth, tileHeight, tileL
 
     // Interaction Bottom side collisions
     x = (character.getX() + character.getWidth() / 2) / tileWidth;
-    y = (character.getY() + character.getHeight() + 10) / tileHeight;
+    y = (character.getY() + character.getHeight() + (character.getHeight() * 0.1)) / tileHeight;
     x = Math.floor(x);
     y = Math.floor(y);
     for (var i = 0; i < tileList.length; i += 1) {
