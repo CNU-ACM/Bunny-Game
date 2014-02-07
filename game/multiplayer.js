@@ -5,7 +5,7 @@ else if(window.location.hostname == 'localhost') server = 'http://localhost:8888
 
 var socket = io.connect(server);
 var charManager = {
-	pids:[]
+	pids:[],
 	mainChar:{
 		spawned:false
 	},
