@@ -62,6 +62,7 @@ var Lib = {
 	canvas:null,
 	canvases:[],
 	ctx:null,
+	detached:null,
 	entities:{},
 	entityExists:{},
 	entityReadyEvents:{},
@@ -76,7 +77,12 @@ var Lib = {
 	readyEvents:[],
 	resources:{},
 	events:{
+		attach:function() {
+			Lib.detached = null;
+			this._detach = false;
+		},
 		detach:function() {
+			Lib.detached = this;
 			this._detach = true;
 		},
 		click:function(a) {
@@ -720,8 +726,19 @@ function render() {
 	for(var i=0;i<Lib.canvases.length;i++) {
 		ctx = Lib.canvases[i].getContext("2d");
 		for(var x=0;x<Lib.canvases[i].objects.length;x++) {
+			var xpos = Lib.canvases[i].objects[x].x;
+			var ypos = Lib.canvases[i].objects[x].y;
+			if(Lib.detached) {
+				if(Lib.detached.id != Lib.canvases[i].objects[x].id) {
+					xpos -= Lib.detached.getX();
+					ypos -= Lib.detached.getY();
+				} else {
+					xpos = 0;
+					ypos = 0;
+				}
+			}
 			ctx.save();
-			ctx.translate(Lib.canvases[i].objects[x].x,Lib.canvases[i].objects[x].y);
+			ctx.translate(xpos,ypos);
 			if(Lib.canvases[i].objects[x].settings.type == "sprite") {
 				if(!Lib.canvases[i].objects[x].isHidden) Lib.canvases[i].objects[x].sprite.render(ctx);
 			} else if(!Lib.canvases[i].objects[x].isHidden) Lib.canvases[i].objects[x].render(ctx);
