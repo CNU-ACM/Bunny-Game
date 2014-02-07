@@ -1,6 +1,6 @@
 function loadTestChar(playerName, worldArray, x, y) {
     Lib("testChar").sprite({
-        src:"Game/Graphics/Characters/bun.png",
+        src:"game/Graphics/Characters/bun.png",
         size:[712,712],
         position:[0, 0],
         speed:100,
